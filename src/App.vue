@@ -8,7 +8,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <h3 class="text-6xl text-green-700">
     Hello HelloWorld
   </h3>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <img alt="Vue logo" src="./assets/icons/rs-logo.svg" />
   <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
 </template>
 

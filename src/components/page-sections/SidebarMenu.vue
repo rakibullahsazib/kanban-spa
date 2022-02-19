@@ -17,7 +17,8 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-const currentNav = computed(() => useRoute().name)
+const route = useRoute()
+const currentNav = computed(() => route.name)
 const navs = [
   {
     name: 'Board View',

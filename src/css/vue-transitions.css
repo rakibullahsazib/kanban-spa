@@ -7,3 +7,14 @@
 .fade-leave-to{
   opacity: 0;
 }
+
+/* Toggle for dropdowns */
+.toggle-enter-active,
+.toggle-leave-active{
+  transition: all 700ms ease;
+}
+.toggle-enter-from,
+.toggle-leave-to{
+  opacity: 0;
+  transform: translateY(-1.5rem);
+}

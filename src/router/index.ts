@@ -9,7 +9,7 @@ const routes = [
       {
         path: '/',
         name: 'Board View',
-        component: () => import('../pages/BoardView.vue')
+        component: () => import('../pages/Home.vue')
       },
       {
         path: '/',

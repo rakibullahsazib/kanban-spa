@@ -2,7 +2,7 @@
   <SidebarSliderLayout
     title="Home"
   >
-    <section>
+    <section class="w-56">
       <HeaderAddButton
         @click="isCreateWorkspaceModalShown = true"
         title="Workspaces"

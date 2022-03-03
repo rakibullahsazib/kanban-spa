@@ -23,10 +23,11 @@
           v-for="option in options"
           :key="option.id"
           class="px-4 py-2 flex space-x-2 items-center cursor-pointer bg-opacity-40 hover:bg-opacity-40"
-          :class="option.id === selectedOptionId ? 'bg-yellow-light hover:bg-yellow-light' : 'bg-white hover:bg-grey-5'"
+          :class="option.id === selectedOptionId ? 'bg-yellow-light hover:bg-yellow-light font-semibold' : 'bg-white hover:bg-grey-5'"
+          :title="option.name"
         >
           <img v-if="option.icon" :src="`/assets/icons/${option.icon}`" class="w-4 h-4">
-          <p>
+          <p class="truncate">
             {{ option.name }}
           </p>
         </div>

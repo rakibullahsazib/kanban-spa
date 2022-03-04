@@ -7,7 +7,7 @@
         @click="isCreateWorkspaceModalShown = true"
         title="Workspaces"
       />
-      <div v-if="!workspaces?.length" class="mt-2 text-grey-7 text-xs">
+      <div v-if="!workspaces.length" class="mt-2 text-grey-7 text-xs">
         <p>
           No workspace created yet.
         </p>
@@ -21,8 +21,9 @@
       <SingleSelectDropdown
         v-else
         @click.stop="toggleCurrentDropdown('slider-workspaces')"
+        @optionClicked="setCurrentWorkspace"
         :options="workspaces"
-        :selectedOptionId="currentWorkspace?.id"
+        :selectedOptionId="currentWorkspace.id"
         placeholder="Select Workspace"
         :isDropdownShown="currentDropdown === 'slider-workspaces'"
         class="mt-4 text-sm"
@@ -44,6 +45,7 @@ const workspaceStore = useWorkspaceStore()
 
 const workspaces = computed(() => workspaceStore.workspaces)
 const currentWorkspace = computed(() => workspaceStore.currentWorkspace)
+const setCurrentWorkspace = workspaceStore.setCurrentWorkspace
 console.log(workspaces.value, currentWorkspace.value)
 const isCreateWorkspaceModalShown = ref(false)
 

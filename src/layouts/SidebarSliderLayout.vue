@@ -4,7 +4,7 @@
     :class="collapsed ? 'w-6 p-4' : 'w-64 p-4'"
   >
     <div class="relative mb-8 flex space-x-2 items-center">
-      <!-- <div class="w-10 h-10 flex-shrink-0 content-center bg-yellow text-grey-9 rounded-full">
+      <!-- <div class="w-10 h-10 flex-shrink-0 flex-center bg-yellow text-grey-9 rounded-full">
         AI
       </div> -->
       <h3 class="text-grey-9 font-semibold text-3xl">
@@ -12,7 +12,7 @@
       </h3>
       <div 
         @click="collapsed = !collapsed"
-        class="absolute -right-4 w-7 h-12 content-center rounded-l-lg bg-grey-7 cursor-pointer"
+        class="absolute -right-4 w-7 h-12 flex-center rounded-l-lg bg-grey-7 cursor-pointer"
       >
         <img 
           src="/assets/icons/collapse-white.svg"

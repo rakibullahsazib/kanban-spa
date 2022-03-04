@@ -8,6 +8,7 @@
         title="Workspaces"
       />
       <SingleSelectDropdown
+        @click.stop="toggleCurrentDropdown('slider-workspaces')"
         :options="workspaces"
         :selectedOptionId="selectedWorkspaceId"
         placeholder="Select Workspace"
@@ -20,10 +21,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useMainStore } from '../../../store/root'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
 
+const mainStore = useMainStore()
 const isCreateWorkspaceModalShown = ref(false)
 const workspaces = computed(() => [
   {
@@ -38,7 +41,8 @@ const workspaces = computed(() => [
   }
 ])
 const selectedWorkspaceId = computed(() => 1)
-const currentDropdown = computed(() => 'slider-workspaces')
+let currentDropdown = computed(() => mainStore.currentDropdown)
+const toggleCurrentDropdown = mainStore.toggleCurrentDropdown
 </script>
 
 <style scoped>

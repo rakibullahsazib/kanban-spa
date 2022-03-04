@@ -15,7 +15,7 @@
     <transition name="toggle">
       <div
         v-show="isDropdownShown"
-        class="absolute mt-2 w-full bg-white text-grey-9 rounded shadow border border-grey-5 overflow-y-auto custom-scrollbar"
+        class="absolute mt-2 w-full bg-white text-grey-9 rounded shadow border border-grey-5 overflow-y-auto custom-scrollbar z-30"
         :style="{'max-height': dropdownHeight}"
       >
         <div
@@ -48,7 +48,7 @@ const props = defineProps<{
   options?: Option[],
   selectedOptionId?: number,
   dropdownHeight?: string,
-  isDropdownShown?: boolean,
+  isDropdownShown: boolean,
   placeholder?: string
 }>()
 

@@ -33,13 +33,13 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useMainStore } from '../../../store/root'
+import { useRootStore } from '../../../store/root'
 import { useWorkspaceStore } from '../../../store/workspace'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
 
-const mainStore = useMainStore()
+const mainStore = useRootStore()
 const workspaceStore = useWorkspaceStore()
 
 const workspaces = computed(() => workspaceStore.workspaces)

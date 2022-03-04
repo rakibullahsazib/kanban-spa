@@ -5,7 +5,7 @@
       :class="selectedOptionId ? 'text-grey-9 font-semibold' : 'text-grey-7'"
     >
       <div class="flex space-x-2 items-center">
-        <img v-if="selectedOption?.icon" :src="`/assets/icons/${selectedOption.icon}`" class="w-4 h-4">
+        <img v-if="selectedOption?.icon" :src="`/assets/icons/${selectedOption.icon}`" class="flex-shrink-0 w-4 h-4">
         <p>
           {{ selectedOptionId ? selectedOption?.name : placeholder }}
         </p>
@@ -26,7 +26,7 @@
           :class="option.id === selectedOptionId ? 'bg-yellow-light hover:bg-yellow-light font-semibold' : 'bg-white hover:bg-grey-5'"
           :title="option.name"
         >
-          <img v-if="option.icon" :src="`/assets/icons/${option.icon}`" class="w-4 h-4">
+          <img v-if="option.icon" :src="`/assets/icons/${option.icon}`" class="flex-shrink-0 w-4 h-4">
           <p class="truncate">
             {{ option.name }}
           </p>

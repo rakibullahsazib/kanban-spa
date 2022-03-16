@@ -31,16 +31,15 @@
           v-for="board in filteredBoards"
           :key="board.id"
           @click="setCurrentBoard(board.id)"
-          class="flex items-center space-x-2 py-1.5 px-2 transition-300"
+          class="parent-hover flex items-center space-x-2 py-1.5 px-2 transition-300"
           :class="currentBoard.id === board.id ? 'bg-highlight-light hover:bg-highlight-light' : 'cursor-pointer hover:bg-grey-1'"
         >
           <img src="/assets/icons/board.svg" alt="">
           <h3 class="flex-grow truncate text-sm font-semibold" :title="board.name">
             {{ board.name }}
           </h3>
-          <img @click.stop="deleteBoard(board.id)" src="/assets/icons/trash.svg" alt="" class="cursor-pointer">
-          <img v-if="board.isFavorite" @click.stop="toggleBoardFavorite(board.id)" src="/assets/icons/star-filled.svg" alt="" class="cursor-pointer">
-          <img v-else @click.stop="toggleBoardFavorite(board.id)" src="/assets/icons/star.svg" alt="" class="cursor-pointer">
+          <img @click.stop="isCreateBoardModalShown = true" src="/assets/icons/edit.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
+          <img @click.stop="deleteBoard(board.id)" src="/assets/icons/trash.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
         </div>
       </div>
     </section>
@@ -49,23 +48,17 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-// import { useRootStore } from '../../../store/root'
 import { useBoardStore } from '../../../store/board'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';
-// import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
 
-// const mainStore = useRootStore()
 const boardStore = useBoardStore()
 
 const boards = computed(() => boardStore.boards)
 const currentBoard = computed(() => boardStore.currentBoard)
 const setCurrentBoard = boardStore.setCurrentBoard
 const deleteBoard = boardStore.deleteBoard
-const toggleBoardFavorite = boardStore.toggleBoardFavorite
-console.log(boards.value, currentBoard.value)
-const isCreateBoardModalShown = ref(false)
 
 const searchInput = ref('')
 const changeSearchInput = (value: string) => {
@@ -78,10 +71,10 @@ const filteredBoards = computed(() => {
   })
 })
 
-// let currentDropdown = computed(() => mainStore.currentDropdown)
-// const toggleCurrentDropdown = mainStore.toggleCurrentDropdown
+const isCreateBoardModalShown = ref(false)
+const isEditBoardModalShown = ref(false)
+
 </script>
 
 <style scoped>
-
 </style>

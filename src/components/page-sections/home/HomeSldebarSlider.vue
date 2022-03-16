@@ -4,53 +4,64 @@
   >
     <section class="w-56">
       <HeaderAddButton
-        @click="isCreateWorkspaceModalShown = true"
-        title="Workspaces"
+        @add="isCreateBoardModalShown = true"
+        title="Boards"
       />
-      <div v-if="!workspaces.length" class="mt-2 text-grey-7 text-xs">
+      <div v-if="!boards.length" class="mt-2 text-grey-7 text-xs">
         <p>
-          No workspace created yet.
+          No board created yet.
         </p>
         <button
-          @click="isCreateWorkspaceModalShown = true"
-          class="mt-0.5 text-grey-9 underline focus:outline-none"
+          @click="isCreateBoardModalShown = true"
+          class="mt-1 text-grey-9 underline focus:outline-none"
         >
-          Add a workspace
+          Add a board
         </button>
       </div>
-      <SingleSelectDropdown
-        v-else
-        @click.stop="toggleCurrentDropdown('slider-workspaces')"
-        @optionClicked="setCurrentWorkspace"
-        :options="workspaces"
-        :selectedOptionId="currentWorkspace.id"
-        placeholder="Select Workspace"
-        :isDropdownShown="currentDropdown === 'slider-workspaces'"
-        class="mt-4 text-sm"
-      />
+
+      <!-- Boards -->
+      <div class="mt-1">
+        <div
+          v-for="board in boards"
+          :key="board.id"
+          @click="setCurrentBoard(board.id)"
+          class="flex items-center space-x-2 py-1.5 px-2 transition-300"
+          :class="currentBoard.id === board.id ? 'bg-highlight-light hover:bg-highlight-light' : 'cursor-pointer hover:bg-grey-1'"
+        >
+          <img src="/assets/icons/board.svg" alt="">
+          <h3 class="flex-grow truncate text-sm font-semibold" :title="board.name">
+            {{ board.name }}
+          </h3>
+          <img @click.stop="deleteBoard(board.id)" src="/assets/icons/trash.svg" alt="" class="cursor-pointer">
+          <img v-if="board.isFavorite" @click.stop="toggleBoardFavorite(board.id)" src="/assets/icons/star-filled.svg" alt="" class="cursor-pointer">
+          <img v-else @click.stop="toggleBoardFavorite(board.id)" src="/assets/icons/star.svg" alt="" class="cursor-pointer">
+        </div>
+      </div>
     </section>
   </SidebarSliderLayout>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useRootStore } from '../../../store/root'
-import { useWorkspaceStore } from '../../../store/workspace'
+// import { useRootStore } from '../../../store/root'
+import { useBoardStore } from '../../../store/board'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
-import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
+// import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
 
-const mainStore = useRootStore()
-const workspaceStore = useWorkspaceStore()
+// const mainStore = useRootStore()
+const boardStore = useBoardStore()
 
-const workspaces = computed(() => workspaceStore.workspaces)
-const currentWorkspace = computed(() => workspaceStore.currentWorkspace)
-const setCurrentWorkspace = workspaceStore.setCurrentWorkspace
-console.log(workspaces.value, currentWorkspace.value)
-const isCreateWorkspaceModalShown = ref(false)
+const boards = computed(() => boardStore.boards)
+const currentBoard = computed(() => boardStore.currentBoard)
+const setCurrentBoard = boardStore.setCurrentBoard
+const deleteBoard = boardStore.deleteBoard
+const toggleBoardFavorite = boardStore.toggleBoardFavorite
+console.log(boards.value, currentBoard.value)
+const isCreateBoardModalShown = ref(false)
 
-let currentDropdown = computed(() => mainStore.currentDropdown)
-const toggleCurrentDropdown = mainStore.toggleCurrentDropdown
+// let currentDropdown = computed(() => mainStore.currentDropdown)
+// const toggleCurrentDropdown = mainStore.toggleCurrentDropdown
 </script>
 
 <style scoped>

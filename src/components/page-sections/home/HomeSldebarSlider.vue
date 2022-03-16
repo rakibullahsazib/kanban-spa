@@ -19,10 +19,16 @@
         </button>
       </div>
 
-      <!-- Boards -->
-      <div class="mt-1">
+      <div v-else class="mt-2">
+        <SearchInput
+          @inputChange="changeSearchInput"
+          id="search-boards"
+          placeholder="Search Boards"
+          class="mb-2 px-2 py-1 w-full border border-grey-5 text-xs rounded"
+        />
+        <!-- Boards -->
         <div
-          v-for="board in boards"
+          v-for="board in filteredBoards"
           :key="board.id"
           @click="setCurrentBoard(board.id)"
           class="flex items-center space-x-2 py-1.5 px-2 transition-300"
@@ -47,6 +53,7 @@ import { computed, ref } from 'vue';
 import { useBoardStore } from '../../../store/board'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
+import SearchInput from '../../inputs/SearchInput.vue';
 // import SingleSelectDropdown from '../../inputs/dropdowns/SingleSelectDropdown.vue';
 
 // const mainStore = useRootStore()
@@ -59,6 +66,17 @@ const deleteBoard = boardStore.deleteBoard
 const toggleBoardFavorite = boardStore.toggleBoardFavorite
 console.log(boards.value, currentBoard.value)
 const isCreateBoardModalShown = ref(false)
+
+const searchInput = ref('')
+const changeSearchInput = (value: string) => {
+  searchInput.value = value
+}
+const filteredBoards = computed(() => {
+  if (!searchInput.value) return boards.value
+  return boards.value.filter(board => {
+    return board.name.toLowerCase().indexOf(searchInput.value.toLowerCase()) > -1
+  })
+})
 
 // let currentDropdown = computed(() => mainStore.currentDropdown)
 // const toggleCurrentDropdown = mainStore.toggleCurrentDropdown

@@ -1,16 +1,16 @@
 export interface TaskRequest{
   name: string;
-  color: string;
   description: string;
+  color: string;
+  order: number;
   stageId: string;
-  checklist: TaskChecklistItem[];
-  assigneeId: string | undefined;
+  assignee: string;
   statusId: string;
-  dueDate: Date;
+  dueDate: string; // ISO
 }
-export interface Task extends TaskRequest{
+export interface TaskDetail extends TaskRequest{
   id: string;
-  createdAt: Date;
+  checklist: TaskChecklistItem[];
 }
 
 export interface TaskChecklistItemRequest {

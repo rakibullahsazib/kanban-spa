@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { BoardBrief, BoardDetail, BoardRequest } from './interface/board.interface'
+import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest } from './interface/board.interface'
 import { v4 as uuid } from 'uuid'
+import { TaskRequest } from './interface/task.interface';
 export interface BoardStoreState {
   boards: BoardBrief[];
   currentBoard: BoardDetail | undefined;
@@ -28,28 +29,9 @@ export const useBoardStore = defineStore('board', {
             stages: [
               {
                 id: uuid(),
-                name: 'Stage 1',               
-                tasks: [{
-                  id: uuid(),
-                  createdAt: new Date(),
-                  color: '#aaa',
-                  name: 'Task 1',
-                  description: 'My Task 1 Descripiton',
-                  stageId: uuid(),
-                  checklist: [
-                    {
-                      id: uuid(),
-                      name: 'Job 1'
-                    },
-                    {
-                      id: uuid(),
-                      name: 'Job 2'
-                    }
-                  ],
-                  assigneeId: uuid(),
-                  statusId: uuid(),
-                  dueDate: new Date()
-                }]
+                name: 'Backlog',
+                order: 1,              
+                tasks: []
               }
             ]
           }
@@ -57,15 +39,6 @@ export const useBoardStore = defineStore('board', {
         }
       }
     },
-    // toggleBoardFavorite(boardId: number) {
-    //   // To do: get Board details
-    //   for (const board of this.boards) {
-    //     if (board.id === boardId) {
-    //       board.isFavorite = !board.isFavorite
-    //       return
-    //     }
-    //   }
-    // },
     addBoard(board: BoardRequest) {
       this.boards.push({
         id: uuid(),
@@ -73,13 +46,66 @@ export const useBoardStore = defineStore('board', {
         ...board,
       })
     },
-    // deleteBoard(boardId: number) {
-    //   for (var i = 0; i < this.boards.length; i++) {
-    //     if (this.boards[i].id === boardId) {
-    //       this.boards.splice(i, 1)
-    //       return
-    //     }
-    //   }
-    // }
+    updateBoard(boardId: string, payload: BoardUpdateRequest) {
+      const boardIndex = this.boards.findIndex((b) => b.id === boardId)
+      this.boards[boardIndex] = {
+        ...this.boards[boardIndex],
+        ...payload
+      }
+      // if current board is updated then we need to update current board properties too
+      if (this.currentBoard?.id === boardId) {
+        let k: keyof BoardUpdateRequest
+        for (k in payload) {
+          this.currentBoard[k] = payload[k] || ''
+        }
+      }
+    },
+    deleteBoard(boardId: string) {
+      const boardIndex = this.boards.findIndex((b) => b.id === boardId)
+      this.boards.splice(boardIndex, 1)
+    },
+    addStage(stage: StageRequest) {
+      if (!this.currentBoard) return
+      this.currentBoard.stages.push({
+        id: uuid(),
+        tasks: [],
+        ...stage,
+      })
+    },
+    updateStage(stageId: string, payload: StageUpdateRequest) {
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
+      if (!this.currentBoard || stageIndex === undefined) return
+      this.currentBoard.stages[stageIndex] = {
+        ...this.currentBoard?.stages[stageIndex],
+        ...payload
+      }
+    },
+    deleteStage(stageId: string) {
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
+      if (!this.currentBoard || stageIndex === undefined || this.currentBoard.stages[stageIndex].name === 'Backlog') return
+      this.currentBoard.stages.splice(stageIndex, 1)
+    },
+    addTask(task: TaskRequest) {
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === task.stageId)
+      if (!this.currentBoard || stageIndex === undefined) return
+      this.currentBoard.stages[stageIndex].tasks.push({
+        id: uuid(),
+        checklist: [],
+        ...task,
+      })
+    },
+    updateTask(stageId: string, payload: StageUpdateRequest) {
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
+      if (!this.currentBoard || stageIndex === undefined) return
+      this.currentBoard.stages[stageIndex] = {
+        ...this.currentBoard?.stages[stageIndex],
+        ...payload
+      }
+    },
+    deleteTask(stageId: string) {
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
+      if (!this.currentBoard || stageIndex === undefined || this.currentBoard.stages[stageIndex].name === 'Backlog') return
+      this.currentBoard.stages.splice(stageIndex, 1)
+    },
   }
 })

@@ -1,8 +1,12 @@
-import { Task } from "./task.interface";
+import { TaskDetail } from "./task.interface";
 
 export interface BoardRequest {
   name: string;
   description: string;
+}
+export interface BoardUpdateRequest {
+  name?: string;
+  description?: string;
 }
 export interface BoardBrief extends BoardRequest {
   id: string;
@@ -14,8 +18,13 @@ export interface BoardDetail extends BoardBrief {
 
 export interface StageRequest {
   name: string;
+  order: number;
+}
+export interface StageUpdateRequest {
+  name?: string;
+  order?: number;
 }
 export interface StageDetail extends StageRequest {
   id: string;
-  tasks: Task[];
+  tasks: TaskDetail[];
 }

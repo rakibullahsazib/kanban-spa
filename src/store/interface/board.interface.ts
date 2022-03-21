@@ -21,8 +21,7 @@ export interface StageRequest {
   order: number;
 }
 export interface StageUpdateRequest {
-  name?: string;
-  order?: number;
+  name: string;
 }
 export interface StageDetail extends StageRequest {
   id: string;

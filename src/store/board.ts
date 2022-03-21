@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
-import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest } from './interface/board.interface'
 import { v4 as uuid } from 'uuid'
-import { TaskRequest } from './interface/task.interface';
+import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest } from './interface/board.interface'
+import { TaskRequest, TaskUpdateRequest } from './interface/task.interface';
+import { updateOrdersInArr } from '../helpers/updateOrdersInArr';
+import { HasOrderAndId } from './interface/common.interface';
+import { getMaxOrder } from '../helpers/arrayMethods';
 export interface BoardStoreState {
   boards: BoardBrief[];
   currentBoard: BoardDetail | undefined;
@@ -67,9 +70,9 @@ export const useBoardStore = defineStore('board', {
     addStage(stage: StageRequest) {
       if (!this.currentBoard) return
       this.currentBoard.stages.push({
-        id: uuid(),
-        tasks: [],
         ...stage,
+        id: uuid(),
+        tasks: []
       })
     },
     updateStage(stageId: string, payload: StageUpdateRequest) {
@@ -79,6 +82,11 @@ export const useBoardStore = defineStore('board', {
         ...this.currentBoard?.stages[stageIndex],
         ...payload
       }
+    },
+    bulkUpdateStageOrder() {
+      if (!this.currentBoard) return
+      const updatesNeeded: HasOrderAndId[] = updateOrdersInArr(this.currentBoard.stages)
+      console.log(updatesNeeded)
     },
     deleteStage(stageId: string) {
       const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
@@ -94,18 +102,22 @@ export const useBoardStore = defineStore('board', {
         ...task,
       })
     },
-    updateTask(stageId: string, payload: StageUpdateRequest) {
+    updateTask(stageId: string, taskId: string, payload: TaskUpdateRequest) {
       const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
       if (!this.currentBoard || stageIndex === undefined) return
-      this.currentBoard.stages[stageIndex] = {
-        ...this.currentBoard?.stages[stageIndex],
+      const taskIndex = this.currentBoard.stages[stageIndex].tasks.findIndex((e) => e.id === taskId)
+      if (taskIndex === undefined) return
+      this.currentBoard.stages[stageIndex].tasks[taskIndex] = {
+        ...this.currentBoard.stages[stageIndex].tasks[taskIndex],
         ...payload
       }
     },
-    deleteTask(stageId: string) {
+    deleteTask(stageId: string, taskId: string) {
       const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
-      if (!this.currentBoard || stageIndex === undefined || this.currentBoard.stages[stageIndex].name === 'Backlog') return
-      this.currentBoard.stages.splice(stageIndex, 1)
+      if (!this.currentBoard || stageIndex === undefined) return
+      const taskIndex = this.currentBoard.stages[stageIndex].tasks.findIndex((e) => e.id === taskId)
+      if (taskIndex === undefined) return
+      this.currentBoard.stages[stageIndex].tasks.splice(taskIndex, 1)
     },
   }
 })

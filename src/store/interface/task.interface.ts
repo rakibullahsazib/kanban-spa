@@ -8,6 +8,15 @@ export interface TaskRequest{
   statusId: string;
   dueDate: string; // ISO
 }
+export interface TaskUpdateRequest{
+  name?: string;
+  description?: string;
+  color?: string;
+  stageId?: string;
+  assignee?: string;
+  statusId?: string;
+  dueDate?: string; // ISO
+}
 export interface TaskDetail extends TaskRequest{
   id: string;
   checklist: TaskChecklistItem[];
@@ -18,6 +27,7 @@ export interface TaskChecklistItemRequest {
 }
 export interface TaskChecklistItem extends TaskChecklistItemRequest {
   id: string;
+  completed: boolean;
 }
 
 export interface TaskStatus{

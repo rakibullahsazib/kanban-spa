@@ -112,6 +112,13 @@ export const useBoardStore = defineStore('board', {
         ...payload
       }
     },
+    bulkUpdateTaskOrder(stageId: string) {
+      if (!this.currentBoard) return
+      const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
+      if (stageIndex === undefined) return
+      const updatesNeeded: HasOrderAndId[] = updateOrdersInArr(this.currentBoard.stages[stageIndex].tasks)
+      console.log(updatesNeeded)
+    },
     deleteTask(stageId: string, taskId: string) {
       const stageIndex = this.currentBoard?.stages.findIndex((e) => e.id === stageId)
       if (!this.currentBoard || stageIndex === undefined) return

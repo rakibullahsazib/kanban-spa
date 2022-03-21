@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { v4 as uuid } from 'uuid'
 import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest } from './interface/board.interface'
-import { TaskRequest, TaskUpdateRequest } from './interface/task.interface';
+import { TaskRequest, TaskUpdateRequest } from './interface/board.interface';
 import { updateOrdersInArr } from '../helpers/updateOrdersInArr';
 import { HasOrderAndId } from './interface/common.interface';
 export interface BoardStoreState {
@@ -18,7 +18,7 @@ export const useBoardStore = defineStore('board', {
   },
   getters: {
     getSortedBoards: (state: BoardStoreState) => {
-      [...state.boards].sort((a: BoardBrief, b: BoardBrief) => a.createdAt.getTime() - b.createdAt.getTime())
+      [...state.boards].sort((a: BoardBrief, b: BoardBrief) => a.order - b.order)
     }
   },
   actions: {
@@ -61,6 +61,10 @@ export const useBoardStore = defineStore('board', {
           this.currentBoard[k] = payload[k] || ''
         }
       }
+    },
+    bulkUpdateBoardOrder() {
+      const updatesNeeded: HasOrderAndId[] = updateOrdersInArr(this.boards)
+      console.log(updatesNeeded)
     },
     deleteBoard(boardId: string) {
       const boardIndex = this.boards.findIndex((b) => b.id === boardId)

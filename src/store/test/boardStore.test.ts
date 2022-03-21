@@ -3,7 +3,8 @@ import { afterEach, beforeAll, beforeEach, describe, expect, test } from 'vitest
 import { useBoardStore } from '../board'
 import { v4 as uuid } from 'uuid'
 import { BoardBrief, StageDetail } from '../interface/board.interface'
-import { TaskDetail } from '../interface/task.interface'
+import { TaskDetail } from '../interface/board.interface'
+import { getMaxOrder } from '../../helpers/arrayMethods'
 
 beforeAll(() => {
   setActivePinia(createPinia())
@@ -11,9 +12,11 @@ beforeAll(() => {
 describe('Board CRUD operations', () => {
   let boardStore: ReturnType<typeof useBoardStore>  
   const createBoard = () => {
+    const maxOrder = getMaxOrder(boardStore.boards)
     boardStore.addBoard({
       name: 'Test Board',
-      description: 'Test Board Description'
+      description: 'Test Board Description',
+      order: maxOrder + 1
     })
     return boardStore.boards[boardStore.boards.length - 1].id
   }
@@ -77,7 +80,8 @@ describe('Board Stage CRUD operations', () => {
   const createAndSetCurrentBoard = () => {
     boardStore.addBoard({
       name: 'Test Board',
-      description: 'Test Board Description'
+      description: 'Test Board Description',
+      order: getMaxOrder(boardStore.boards) + 1
     })
     boardStore.setCurrentBoard(boardStore.boards[boardStore.boards.length - 1].id)
   }
@@ -143,7 +147,8 @@ describe('Board Task CRUD operations', () => {
   const createAndSetCurrentBoard = () => {
     boardStore.addBoard({
       name: 'Test Board',
-      description: 'Test Board Description'
+      description: 'Test Board Description',
+      order: getMaxOrder(boardStore.boards) + 1
     })
     boardStore.setCurrentBoard(boardStore.boards[boardStore.boards.length - 1].id)
     // current board already have a stage called backlog

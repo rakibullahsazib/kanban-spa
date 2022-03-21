@@ -31,14 +31,14 @@ describe('update order of objects in array', () => {
       }
     ]
   })
-  test('order increases by array index', () => {    
+  test('order decreases by array index', () => {    
     updateOrdersInArr(testArr)
     // expect(updatedArr.length).toBeLessThanOrEqual(testArr.length)
-    expect(testArr[0].order).toBe(1)
-    expect(testArr[1].order).toBe(2)
+    expect(testArr[0].order).toBe(5)
+    expect(testArr[1].order).toBe(4)
     expect(testArr[2].order).toBe(3)
-    expect(testArr[3].order).toBe(4)
-    expect(testArr[4].order).toBe(5)
+    expect(testArr[3].order).toBe(2)
+    expect(testArr[4].order).toBe(1)
   })
   test('update Array length must be less than or equal to original array', () => {    
     const updateArr = updateOrdersInArr(testArr)
@@ -49,9 +49,9 @@ describe('update order of objects in array', () => {
 
     expect(updateArr.length).toBe(4)
 
-    expect(updateArr[0].order).toBe(1)
-    expect(updateArr[1].order).toBe(2)
-    expect(updateArr[2].order).toBe(4)
-    expect(updateArr[3].order).toBe(5)
+    expect(updateArr[0].order).toBe(5)
+    expect(updateArr[1].order).toBe(4)
+    expect(updateArr[2].order).toBe(2)
+    expect(updateArr[3].order).toBe(1)
   })
 })

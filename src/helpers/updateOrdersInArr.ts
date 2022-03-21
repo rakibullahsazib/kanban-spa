@@ -1,16 +1,15 @@
-interface hasOrderProperty {
-  id: string;
-  order: number
-}
+import { HasOrderAndId } from "../store/interface/common.interface"
 
-export const updateOrdersInArr = (arr: hasOrderProperty[]) => {
-  const updatesNeeded : hasOrderProperty[] = []
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].order !== i + 1) {
-      arr[i].order = i + 1
+// We need to arrange the orders in such a way so that when a new item is added we don't need to change orders to all of them. Therfore, we are considering higher order number to be higher priority.
+export const updateOrdersInArr = (arr: HasOrderAndId[]) => {
+  const updatesNeeded : HasOrderAndId[] = []
+  const l = arr.length
+  for (let i = 0; i < l; i++) {
+    if (arr[i].order !== l - i) {
+      arr[i].order = l - i
       updatesNeeded.push({
         id: arr[i].id,
-        order: i + 1
+        order: l - i
       })
     }
   }

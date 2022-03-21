@@ -4,7 +4,6 @@ import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest
 import { TaskRequest, TaskUpdateRequest } from './interface/task.interface';
 import { updateOrdersInArr } from '../helpers/updateOrdersInArr';
 import { HasOrderAndId } from './interface/common.interface';
-import { getMaxOrder } from '../helpers/arrayMethods';
 export interface BoardStoreState {
   boards: BoardBrief[];
   currentBoard: BoardDetail | undefined;

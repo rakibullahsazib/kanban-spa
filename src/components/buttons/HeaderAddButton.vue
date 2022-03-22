@@ -5,6 +5,7 @@
     </h4>
     <button
       @click="$emit('add')"
+      :data-testid="`${title}-add-btn`"
     >
       <img class="w-4 h-4" src="/assets/icons/plus-circle.svg" alt="Add">
     </button>

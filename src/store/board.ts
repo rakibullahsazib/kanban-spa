@@ -42,9 +42,10 @@ export const useBoardStore = defineStore('board', {
       }
     },
     addBoard(board: BoardRequest) {
+      console.log('add board')
       this.boards.push({
         id: uuid(),
-        createdAt: new Date(),
+        createdAt: new Date().toISOString(),
         ...board,
       })
     },

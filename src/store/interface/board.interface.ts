@@ -9,7 +9,7 @@ export interface BoardUpdateRequest {
 }
 export interface BoardBrief extends BoardRequest {
   id: string;
-  createdAt: Date;
+  createdAt: string;
 }
 export interface BoardDetail extends BoardBrief {
   stages: StageDetail[];

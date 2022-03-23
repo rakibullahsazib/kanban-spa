@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest --dom",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -17,9 +17,12 @@
     "vue-router": "4"
   },
   "devDependencies": {
+    "@pinia/testing": "^0.0.10",
+    "@testing-library/vue": "^6.4.2",
     "@vitejs/plugin-vue": "^2.2.0",
     "autoprefixer": "^10.4.2",
     "c8": "^7.11.0",
+    "happy-dom": "^2.50.0",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.22",
     "typescript": "^4.5.4",

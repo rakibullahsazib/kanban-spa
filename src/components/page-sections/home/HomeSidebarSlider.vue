@@ -4,7 +4,7 @@
   >
     <section class="w-56">
       <HeaderAddButton
-        @add="isCreateBoardModalShown = true"
+        @add="isAddBoardModalShown = true"
         title="Boards"
       />
       <div v-if="!boards.length" class="mt-2 text-grey-7 text-xs">
@@ -12,8 +12,9 @@
           No board created yet.
         </p>
         <button
-          @click="isCreateBoardModalShown = true"
+          @click="isAddBoardModalShown = true"
           class="mt-1 text-grey-9 underline focus:outline-none"
+          data-testid="add-board-text-btn"
         >
           Add a board
         </button>
@@ -32,17 +33,27 @@
           :key="board.id"
           @click="setCurrentBoard(board.id)"
           class="parent-hover flex items-center space-x-2 py-1.5 px-2 transition-300"
-          :class="currentBoard.id === board.id ? 'bg-highlight-light hover:bg-highlight-light' : 'cursor-pointer hover:bg-grey-1'"
+          :class="currentBoard?.id === board.id ? 'bg-highlight-light hover:bg-highlight-light' : 'cursor-pointer hover:bg-grey-1'"
         >
           <img src="/assets/icons/board.svg" alt="">
           <h3 class="flex-grow truncate text-sm font-semibold" :title="board.name">
             {{ board.name }}
           </h3>
-          <img @click.stop="isCreateBoardModalShown = true" src="/assets/icons/edit.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
+          <img @click.stop="isAddBoardModalShown = true" src="/assets/icons/edit.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
           <img @click.stop="deleteBoard(board.id)" src="/assets/icons/trash.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
         </div>
       </div>
     </section>
+    <teleport to="body">
+      <transition name="fade">
+      <AddBoardModal
+        v-if="isAddBoardModalShown"
+        @closeModal="isAddBoardModalShown = false"
+        class="z-30"
+        data-testid="add-board-modal"
+      />
+      </transition>
+    </teleport>
   </SidebarSliderLayout>
 </template>
 
@@ -52,6 +63,7 @@ import { useBoardStore } from '../../../store/board'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';
+import AddBoardModal from '../../modals/AddBoardModal.vue';
 
 const boardStore = useBoardStore()
 
@@ -71,7 +83,7 @@ const filteredBoards = computed(() => {
   })
 })
 
-const isCreateBoardModalShown = ref(false)
+const isAddBoardModalShown = ref(false)
 const isEditBoardModalShown = ref(false)
 
 </script>

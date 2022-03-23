@@ -6,9 +6,10 @@
       :id="id"
       :placeholder="placeholder"
       class=" flex-grow w-full focus:outline-none"
+      data-testid="search-input"
     >
     <label :for="id" class="block flex-shrink-0">
-      <img class="w-5 h-5" src="assets/icons/search.svg" alt="">
+      <img class="w-5 h-5" src="/assets/icons/search.svg" alt="">
     </label>
   </div>
 </template>

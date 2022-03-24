@@ -1,11 +1,12 @@
-import { expect, test, beforeAll, describe, beforeEach, afterEach, fn } from "vitest";
-import {render, screen, fireEvent, RenderResult, waitFor} from '@testing-library/vue'
+import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import HomeSidebarSlider from './HomeSidebarSlider.vue'
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue'
-import { mount } from "@vue/test-utils"
+import AddBoardModal from '../../modals/AddBoardModal.vue'
+import { mount } from '@vue/test-utils'
 import { useBoardStore } from '../../../store/board'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
+import { nextTick } from "vue";
 
 let boardStore: ReturnType<typeof useBoardStore>  
 const createBoard = () => {
@@ -16,53 +17,56 @@ const createBoard = () => {
     order: maxOrder + 1
   })
 
-  // return boardStore.boards[boardStore.boards.length - 1].id
+  return boardStore.boards[boardStore.boards.length - 1].id
 }
-
+// render factory
+let wrapper: any
+const createWrapper = () => {
+  wrapper = mount(HomeSidebarSlider, {
+    global: { 
+      plugins: [ createTestingPinia({ createSpy: fn, stubActions: false }) ] 
+    }
+  })
+}
+// helpers
+const findAddBoardTextBtn = () => wrapper.find('[data-testid=add-board-text-btn]')
+const findAddBoardModal = () => wrapper.findComponent(AddBoardModal)
 describe('add board buttons', () => {
-  let homeSidebarSlider: RenderResult
   beforeEach(() => {
-    homeSidebarSlider = render(HomeSidebarSlider, {
-      global: { 
-        plugins: [ createTestingPinia({ createSpy: fn, stubActions: false }) ] 
-      }
-    })
+    createWrapper()
     boardStore = useBoardStore()
   })
   afterEach(() => {
     boardStore.$reset()
+    wrapper.unmount()
   })
 
   test('When there are no boards, show add board modal on add board text button click', async () => {
-    
+    expect(findAddBoardModal().exists()).toBe(false)
     expect(boardStore.boards).toStrictEqual([])
-
-    const addBoardTextBtn =  homeSidebarSlider.getByTestId('add-board-text-btn')
-  
-    await fireEvent.click(addBoardTextBtn)
-    homeSidebarSlider.getByTestId('add-board-modal')
+    
+    findAddBoardTextBtn().trigger('click')
+    await nextTick()
+    
+    expect(findAddBoardModal().exists()).toBe(true)
   })
 
   test('show add board modal on add board plus button click', async () => {
+    
+    expect(findAddBoardModal().exists()).toBe(false)
+    
+    const headerBtn = wrapper.findComponent(HeaderAddButton)
+    headerBtn.vm.$emit('add')
+    expect(headerBtn.emitted().add).toBeTruthy
+    await nextTick()
 
-    const headerBtn = render(HeaderAddButton, {
-      props: {
-        title: 'Board'
-      }
-    })
-    const addBtn = headerBtn.getByTestId('Board-add-btn')
-    await fireEvent.click(addBtn)
-
-    homeSidebarSlider.getByTestId('add-board-modal')
+    expect(findAddBoardModal().exists()).toBe(true)
   })
 
-  test.only('When a board is added, The add board text button disappears', async () => {
-    expect(homeSidebarSlider.queryByTestId('add-board-text-btn')).toBeDefined()
-    await waitFor(() => {
-      createBoard()
-    })
-    expect(homeSidebarSlider.queryByTestId('add-board-text-btn')).toBeNull()
+  test('When a board is added, The add board text button disappears', async () => {
+    expect(findAddBoardTextBtn().exists()).toBe(true)
+    createBoard()
+    await nextTick()
+    expect(findAddBoardTextBtn().exists()).toBe(false)
   })
-
-  
 })

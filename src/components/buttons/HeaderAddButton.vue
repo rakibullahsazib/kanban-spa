@@ -4,7 +4,7 @@
       {{ title }}
     </h4>
     <button
-      @click="$emit('add')"
+      @click="emitEvent"
       :data-testid="`${title}-add-btn`"
     >
       <img class="w-4 h-4" src="/assets/icons/plus-circle.svg" alt="Add">
@@ -16,6 +16,10 @@
 defineProps<{
   title?: string
 }>()
+const emit = defineEmits(['add'])
+const emitEvent = () => {
+  emit('add')
+} 
 </script>
 
 <style scoped>

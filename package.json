@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@pinia/testing": "^0.0.10",
-    "@testing-library/vue": "^6.4.2",
     "@vitejs/plugin-vue": "^2.2.0",
+    "@vue/test-utils": "^2.0.0-rc.18",
     "autoprefixer": "^10.4.2",
     "c8": "^7.11.0",
     "happy-dom": "^2.50.0",

@@ -1,11 +1,10 @@
 import { expect, test, beforeEach, afterEach } from "vitest";
 import { mount } from '@vue/test-utils'
-
+import { VueWrapper } from "@vue/test-utils";
 import SearchInput from './SearchInput.vue'
-import { nextTick } from "vue";
 
 // render factory
-let wrapper: any
+let wrapper: VueWrapper
 const createWrapper = () => {
   wrapper = mount(SearchInput, {
     props: {
@@ -29,8 +28,7 @@ test('input exists with passed props', async () => {
   expect(findSearchInput().attributes('placeholder')).toBe('test-placeholder')
 })
 test('emit event with input value as payload', async () => {
-  findSearchInput().setValue('test-value')
-  await nextTick()
+  await findSearchInput().setValue('test-value')
   expect(wrapper.emitted().inputChange).toBeTruthy()
   expect(wrapper.emitted().inputChange[0]).toEqual(['test-value'])
 })

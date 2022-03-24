@@ -2,7 +2,7 @@ import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import HomeSidebarSlider from './HomeSidebarSlider.vue'
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue'
 import AddBoardModal from '../../modals/AddBoardModal.vue'
-import { mount } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
 import { useBoardStore } from '../../../store/board'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
@@ -20,7 +20,7 @@ const createBoard = () => {
   return boardStore.boards[boardStore.boards.length - 1].id
 }
 // render factory
-let wrapper: any
+let wrapper: VueWrapper
 const createWrapper = () => {
   wrapper = mount(HomeSidebarSlider, {
     global: { 
@@ -45,8 +45,7 @@ describe('add board buttons', () => {
     expect(findAddBoardModal().exists()).toBe(false)
     expect(boardStore.boards).toStrictEqual([])
     
-    findAddBoardTextBtn().trigger('click')
-    await nextTick()
+    await findAddBoardTextBtn().trigger('click')
     
     expect(findAddBoardModal().exists()).toBe(true)
   })

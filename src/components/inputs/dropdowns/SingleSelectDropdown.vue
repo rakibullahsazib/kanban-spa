@@ -45,7 +45,7 @@ interface Option {
   icon?: string
 }
 const props = defineProps<{
-  options?: Option[],
+  options: Option[],
   selectedOptionId?: number,
   dropdownHeight?: string,
   isDropdownShown: boolean,

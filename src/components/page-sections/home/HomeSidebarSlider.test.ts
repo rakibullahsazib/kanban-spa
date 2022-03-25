@@ -1,7 +1,7 @@
 import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import HomeSidebarSlider from './HomeSidebarSlider.vue'
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue'
-import AddBoardModal from '../../modals/AddBoardModal.vue'
+import BoardModal from '../../modals/BoardModal.vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { useBoardStore } from '../../../store/board.store'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
@@ -31,7 +31,7 @@ const createWrapper = () => {
 }
 // helpers
 const findAddBoardTextBtn = () => wrapper.find('[data-testid=add-board-text-btn]')
-const findAddBoardModal = () => wrapper.findComponent(AddBoardModal)
+const findBoardModal = () => wrapper.findComponent(BoardModal)
 const findBoardById = (id: string) => wrapper.find(`[data-testid=board_${id}]`)
 const findBoardEditButtonByBoardId = (id: string) => wrapper.find(`[data-testid=board_${id}_edit]`)
 const findBoardDeleteButtonByBoardId = (id: string) => wrapper.find(`[data-testid=board_${id}_delete]`)
@@ -48,24 +48,24 @@ describe('add board buttons', () => {
   })
 
   test('When there are no boards, show add board modal on add board text button click', async () => {
-    expect(findAddBoardModal().exists()).toBe(false)
+    expect(findBoardModal().exists()).toBe(false)
     expect(boardStore.boards).toStrictEqual([])
     
     await findAddBoardTextBtn().trigger('click')
     
-    expect(findAddBoardModal().exists()).toBe(true)
+    expect(findBoardModal().exists()).toBe(true)
   })
 
   test('show add board modal on add board plus button click', async () => {
     
-    expect(findAddBoardModal().exists()).toBe(false)
+    expect(findBoardModal().exists()).toBe(false)
     
     const headerBtn = wrapper.findComponent(HeaderAddButton)
     headerBtn.vm.$emit('add')
     expect(headerBtn.emitted().add).toBeTruthy
     await nextTick()
 
-    expect(findAddBoardModal().exists()).toBe(true)
+    expect(findBoardModal().exists()).toBe(true)
   })
 
   test('When a board is added, The add board text button disappears', async () => {
@@ -106,7 +106,7 @@ describe('board list', () => {
   })
   test('clicking on board edit button opens up add/edit board modal', async () => {
     await findBoardEditButtonByBoardId(boardStore.boards[0].id).trigger('click')
-    expect(findAddBoardModal().exists()).toBe(true)
+    expect(findBoardModal().exists()).toBe(true)
   })
   test('deleting a board from board list deletes the board board from store and ui', async () => {
     // deleting all the boards in store from ui

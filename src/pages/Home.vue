@@ -10,7 +10,7 @@
         <p>
           Sorry, No board found.&nbsp;
           <span
-            @click="isAddBoardModalShown = true"
+            @click="isBoardModalShown = true"
             class="mt-1 text-grey-9 underline focus:outline-none cursor-pointer font-semibold"
             data-testid="add-board-text-btn"
           >
@@ -21,9 +21,9 @@
     </div>
     <teleport to="body">
       <transition name="fade">
-      <AddBoardModal
-        v-if="isAddBoardModalShown"
-        @closeModal="isAddBoardModalShown = false"
+      <BoardModal
+        v-if="isBoardModalShown"
+        @closeModal="isBoardModalShown = false"
         class="z-30"
         data-testid="add-board-modal"
       />
@@ -35,23 +35,24 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRootStore } from '../store/root.store'
 import { useBoardStore } from '../store/board.store';
+import { fake_boards, fake_currentBoard } from '../fakeData/board.fake';
 
 import HomeSldebarSlider from '@/components/page-sections/home/HomeSidebarSlider.vue';
 import HomeHeader from '@/components/page-sections/home/HomeHeader.vue';
-import AddBoardModal from '@/components/modals/AddBoardModal.vue';
+import BoardModal from '@/components/modals/BoardModal.vue';
 
 
 const rootStore = useRootStore()
 const boardStore = useBoardStore()
 const currentBoard = computed(() => boardStore.currentBoard)
 
-const isAddBoardModalShown = ref(false)
+const isBoardModalShown = ref(false)
 
-// let currentDropdown = computed(() => rootStore.currentDropdown)
-// const toggleCurrentDropdown = rootStore.toggleCurrentDropdown
-// onMounted(() => {
-//   window.addEventListener('click', function () {
-//     rootStore.toggleCurrentDropdown('')
-//   })
-// })
+onMounted(() => {
+  boardStore.boards = fake_boards
+  boardStore.currentBoard = fake_currentBoard
+  window.addEventListener('click', function () {
+    rootStore.toggleCurrentDropdown('')
+  })
+})
 </script>

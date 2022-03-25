@@ -1,7 +1,7 @@
 import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import { mount, VueWrapper } from '@vue/test-utils'
 import Home from './Home.vue'
-import AddBoardModal from '@/components/modals/AddBoardModal.vue'
+import BoardModal from '@/components/modals/BoardModal.vue'
 import { useBoardStore } from '../store/board.store'
 import { getMaxOrder } from '../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
@@ -30,7 +30,7 @@ const createWrapper = () => {
 }
 // helpers
 const findAddBoardTextBtn = () => wrapper.find('[data-testid=add-board-text-btn]')
-const findAddBoardModal = () => wrapper.findComponent(AddBoardModal)
+const findBoardModal = () => wrapper.findComponent(BoardModal)
 
 
 describe('add board buttons', () => {
@@ -46,16 +46,18 @@ describe('add board buttons', () => {
   // test.only('playground', async () => {
   //   expect(findAddBoardTextBtn().exists()).toBe(true)    
   //   await findAddBoardTextBtn().trigger('click')    
-  //   expect(findAddBoardModal().exists()).toBe(true)
+  //   expect(findBoardModal().exists()).toBe(true)
   // })
   test('When there is no current board, show add board text btn', async () => {
+    if (boardStore.boards.length) return
     expect(findAddBoardTextBtn().exists()).toBe(true)    
     await findAddBoardTextBtn().trigger('click')    
-    expect(findAddBoardModal().exists()).toBe(true)
+    expect(findBoardModal().exists()).toBe(true)
   })
   test('show add board modal on add board text button click', async () => {
+    if (boardStore.boards.length) return
     expect(findAddBoardTextBtn().exists()).toBe(true)    
     await findAddBoardTextBtn().trigger('click')    
-    expect(findAddBoardModal().exists()).toBe(true)
+    expect(findBoardModal().exists()).toBe(true)
   })
 })

@@ -41,7 +41,7 @@
             {{ board.name }}
           </h3>
           <img
-            @click.stop="isAddBoardModalShown = true"
+            @click.stop="boardToBeEdited = board.id"
             src="/assets/icons/edit.svg"
             class="child-visible cursor-pointer w-4 h-4"
             :data-testid="`board_${board.id}_edit`"
@@ -57,11 +57,11 @@
     </section>
     <teleport to="body">
       <transition name="fade">
-      <AddBoardModal
-        v-if="isAddBoardModalShown"
-        @closeModal="isAddBoardModalShown = false"
+      <BoardModal
+        v-if="isAddBoardModalShown || boardToBeEdited"
+        @closeModal="closeBoardModal"
+        :boardId="boardToBeEdited"
         class="z-30"
-        data-testid="add-board-modal"
       />
       </transition>
     </teleport>
@@ -74,7 +74,7 @@ import { useBoardStore } from '../../../store/board.store'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';
-import AddBoardModal from '../../modals/AddBoardModal.vue';
+import BoardModal from '../../modals/BoardModal.vue';
 
 const boardStore = useBoardStore()
 
@@ -95,7 +95,11 @@ const filteredBoards = computed(() => {
 })
 
 const isAddBoardModalShown = ref(false)
-const isEditBoardModalShown = ref(false)
+const boardToBeEdited = ref<string|undefined>(undefined)
+const closeBoardModal = () => {
+  isAddBoardModalShown.value = false
+  boardToBeEdited.value = undefined
+}
 
 </script>
 

@@ -4,7 +4,7 @@
             <img @click="$emit('closeModal')" class="absolute top-4 right-4 w-6 h-6 cursor-pointer" src="/assets/icons/cross-circle.svg" alt="Close">
 
             <h6 class="text-center text-grey-8 font-medium text-lg">
-              Add Board
+              {{ boardId ? 'Edit' : 'Add' }} Board
             </h6>
 
             <p class="mt-6 text-center text-grey-8">
@@ -25,9 +25,9 @@
 
 
 <script setup lang="ts">
-// defineProps<{
-//   y
-// }>()
+defineProps<{
+  boardId?: string
+}>()
 const onConfirm = () => {
   console.log('confirm')
 }

@@ -70,7 +70,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useBoardStore } from '../../../store/board'
+import { useBoardStore } from '../../../store/board.store'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';

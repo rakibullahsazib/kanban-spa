@@ -3,11 +3,11 @@ import HomeSidebarSlider from './HomeSidebarSlider.vue'
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue'
 import AddBoardModal from '../../modals/AddBoardModal.vue'
 import { mount, VueWrapper } from '@vue/test-utils'
-import { useBoardStore } from '../../../store/board'
+import { useBoardStore } from '../../../store/board.store'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
 import { nextTick } from "vue";
-import { fake_boards } from "../../../fakeData/board";
+import { fake_boards } from "../../../fakeData/board.fake";
 
 let boardStore: ReturnType<typeof useBoardStore>  
 const createBoard = () => {

@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { useRootStore } from '../store/root'
+import { useRootStore } from '../store/root.store'
 
 import HomeSldebarSlider from '../components/page-sections/home/HomeSidebarSlider.vue';
 

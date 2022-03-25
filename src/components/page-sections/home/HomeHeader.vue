@@ -13,6 +13,7 @@
         >
         <transition name="toggle">
           <HeadlessSingleSelectDropdown
+            @optionClicked="setCurrentBoard($event)"
             :isDropdownShown="currentDropdown === 'boards'"
             :options="boards"
             :selectedOptionId="currentBoard.id"
@@ -70,6 +71,7 @@ const rootStore = useRootStore()
 const boardStore = useBoardStore()
 const boards = computed(() => boardStore.boards)
 const currentBoard = computed(() => boardStore.currentBoard)
+const setCurrentBoard = boardStore.setCurrentBoard
 const boardToBeEdited = ref<string|undefined>(undefined)
 const deleteBoard = (boardId: string|undefined) => {
   if(!boardId) return

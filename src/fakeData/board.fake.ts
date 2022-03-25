@@ -1,4 +1,4 @@
-import { BoardBrief } from "../store/interface/board.interface";
+import { BoardBrief, BoardDetail } from "../store/interface/board.interface";
 
 export const fake_boards: BoardBrief[] = [
   {
@@ -37,3 +37,19 @@ export const fake_boards: BoardBrief[] = [
     order: 5
   },
 ]
+
+export const fake_currentBoard: BoardDetail = {
+  id: '2',
+  createdAt: new Date().toISOString(),
+  name: 'Board 2',
+  description: 'Board 2 Description',
+  order: 2,
+  stages: [
+    {
+      id: '1',
+      name: 'Backlog',
+      order: 1,              
+      tasks: []
+    }
+  ]
+}

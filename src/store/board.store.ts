@@ -48,6 +48,10 @@ export const useBoardStore = defineStore('board', {
         createdAt: new Date().toISOString(),
         ...board,
       })
+      // if this is the first board then set current board to this
+      if (this.boards.length === 1) {
+        this.setCurrentBoard(this.boards[0].id)
+      }
     },
     updateBoard(boardId: string, payload: BoardUpdateRequest) {
       const boardIndex = this.boards.findIndex((b) => b.id === boardId)
@@ -68,6 +72,10 @@ export const useBoardStore = defineStore('board', {
       console.log(updatesNeeded)
     },
     deleteBoard(boardId: string) {
+      // if deleting current board first change the current board to another one or undefined
+      if (boardId === this.currentBoard?.id) {
+        this.setCurrentBoard(this.boards[0]?.id)
+      }
       const boardIndex = this.boards.findIndex((b) => b.id === boardId)
       this.boards.splice(boardIndex, 1)
     },

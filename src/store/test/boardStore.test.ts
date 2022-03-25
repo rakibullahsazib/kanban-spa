@@ -35,10 +35,12 @@ describe('Board CRUD operations', () => {
     expect(boardStore.boards).toStrictEqual([])
   })
   test('add a board', () => {
-    createBoard()
+    const boardId = createBoard()
     expect(boardStore.boards[boardStore.boards.length - 1]).toBeDefined()
     expect(boardStore.boards[boardStore.boards.length - 1].name).toBe('Test Board')
     expect(boardStore.boards[boardStore.boards.length - 1].description).toBe('Test Board Description')
+    // set the newly created board to current board
+    expect(boardStore.currentBoard?.id).toBe(boardId)
   })
   test('update board name', () => {
     const boardId = createBoard()
@@ -73,6 +75,15 @@ describe('Board CRUD operations', () => {
     expect(boardStore.boards[0].id).toBe(boardId2)
     boardStore.deleteBoard(boardId2)
     expect(boardStore.boards.length).toBe(0)
+  })
+  test('delete current board from boards', () => {
+    const boardId1 = createBoard()
+    const boardId2 = createBoard()
+    boardStore.setCurrentBoard(boardId2)
+    boardStore.deleteBoard(boardId2)
+    expect(boardStore.boards.length).toBe(1)
+    expect(boardStore.boards[0].id).toBe(boardId1)
+    expect(boardStore.currentBoard?.id).toBe(boardId1)
   })
 })
 describe('Board Stage CRUD operations', () => {

@@ -30,7 +30,8 @@
         <!-- Boards -->
         <div
           v-for="board in filteredBoards"
-          :key="board.id"
+          :key="`board_${board.id}`"
+          :data-testid="`board_${board.id}`"
           @click="setCurrentBoard(board.id)"
           class="parent-hover flex items-center space-x-2 py-1.5 px-2 transition-300"
           :class="currentBoard?.id === board.id ? 'bg-highlight-light hover:bg-highlight-light' : 'cursor-pointer hover:bg-grey-1'"
@@ -39,8 +40,18 @@
           <h3 class="flex-grow truncate text-sm font-semibold" :title="board.name">
             {{ board.name }}
           </h3>
-          <img @click.stop="isAddBoardModalShown = true" src="/assets/icons/edit.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
-          <img @click.stop="deleteBoard(board.id)" src="/assets/icons/trash.svg" alt="" class="child-visible cursor-pointer w-4 h-4">
+          <img
+            @click.stop="isAddBoardModalShown = true"
+            src="/assets/icons/edit.svg"
+            class="child-visible cursor-pointer w-4 h-4"
+            :data-testid="`board_${board.id}_edit`"
+          >
+          <img
+            @click.stop="deleteBoard(board.id)"
+            src="/assets/icons/trash.svg" alt=""
+            class="child-visible cursor-pointer w-4 h-4"
+            :data-testid="`board_${board.id}_delete`"
+          >
         </div>
       </div>
     </section>

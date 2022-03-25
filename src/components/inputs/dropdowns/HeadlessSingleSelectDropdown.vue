@@ -1,6 +1,6 @@
 <template>
     <div
-      v-show="isDropdownShown"
+      v-show="isDropdownShown && options.length"
       class="absolute mt-2 w-full bg-white text-grey-9 rounded shadow border border-grey-5 overflow-y-auto custom-scrollbar z-30"
       :style="{'max-height': dropdownHeight}"
     >
@@ -8,6 +8,7 @@
         @click="$emit('optionClicked', option.id)"
         v-for="option in options"
         :key="option.id"
+        :data-testid="`option_${option.id}`"
         class="px-4 py-2 flex space-x-2 items-center cursor-pointer bg-opacity-40 hover:bg-opacity-40"
         :class="option.id === selectedOptionId ? 'bg-yellow-light hover:bg-yellow-light font-semibold' : 'bg-white hover:bg-grey-5'"
         :title="option.name"

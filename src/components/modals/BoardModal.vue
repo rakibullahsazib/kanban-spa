@@ -1,19 +1,22 @@
 <template>
     <div @click.self.stop="$emit('closeModal')" class="fixed inset-0  flex justify-center items-center bg-grey-9 bg-opacity-60">
-        <div @click.stop class="relative px-12 py-12 bg-white overflow-y-auto custom-scrollbar rounded" style="max-height: 80%; max-width: 540px; min-width: 375px">
-            <img @click="$emit('closeModal')" class="absolute top-4 right-4 w-6 h-6 cursor-pointer" src="/assets/icons/cross-circle.svg" alt="Close">
+        <div @click.stop class="modal-viewport relative px-12 py-12 bg-white overflow-y-auto custom-scrollbar rounded">
+            <img @click="$emit('closeModal')" class="absolute top-6 right-6 w-6 h-6 cursor-pointer" src="/assets/icons/cross-circle.svg" alt="Close">
 
             <h6 class="text-center text-grey-8 font-semibold text-lg">
               {{ boardId ? 'Edit' : 'Add' }} Board
             </h6>
 
-            <p class="mt-6 text-center text-grey-8">
-                message
-            </p>
-            <div>
+            <div class="mt-8">
                 <TextInput
                     id="board-name"
-                    label="Title"
+                    label="Board Title"
+                />
+                <Textarea
+                    id="board-description"
+                    label="Description"
+                    inputHeight="7rem"
+                    class="mt-4"
                 />
             </div>
             <div class="mt-12 flex justify-center">
@@ -32,6 +35,7 @@
 
 <script setup lang="ts">
 import TextInput from '../inputs/TextInput.vue';
+import Textarea from '../inputs/Textarea.vue';
 defineProps<{
   boardId?: string
 }>()
@@ -41,5 +45,9 @@ const onConfirm = () => {
 </script>
 
 <style scoped>
-
+.modal-viewport {
+    max-height: 80%;
+    max-width: 540px;
+    min-width: 420px;
+}
 </style>

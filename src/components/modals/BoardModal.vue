@@ -19,16 +19,12 @@
                     class="mt-4"
                 />
             </div>
-            <div class="mt-12 flex justify-center">
-                <button @click="onConfirm" class="px-4 py-2 text-red  rounded-full focus:outline-none">
-                    Add Board
-                </button>
-                <button @click="$emit('closeModal')" class="ml-6 px-6 py-4 text-white bg-violet-2 rounded-full focus:outline-none">
-                    Cancel
-                </button>
-            </div>
+            <Button
+                @click="$emit('closeModal')"
+                :title="`${ boardId ? 'Edit' : 'Add' } Board`"
+                class="mt-8 mx-auto"
+            />
         </div>
-
     </div>
 </template>
 
@@ -36,6 +32,7 @@
 <script setup lang="ts">
 import TextInput from '../inputs/TextInput.vue';
 import Textarea from '../inputs/Textarea.vue';
+import Button from '../buttons/Button.vue';
 defineProps<{
   boardId?: string
 }>()

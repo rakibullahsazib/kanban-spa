@@ -49,10 +49,10 @@ const currentBoard = computed(() => boardStore.currentBoard)
 const isBoardModalShown = ref(false)
 
 onMounted(() => {
-  boardStore.boards = fake_boards
-  boardStore.currentBoard = fake_currentBoard
   window.addEventListener('click', function () {
     rootStore.toggleCurrentDropdown('')
   })
+  boardStore.getBoards()
+  boardStore.currentBoard = fake_currentBoard
 })
 </script>

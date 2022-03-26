@@ -4,6 +4,7 @@ import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest
 import { TaskRequest, TaskUpdateRequest } from './interface/board.interface';
 import { updateOrdersInArr } from '../helpers/updateOrdersInArr';
 import { HasOrderAndId } from './interface/common.interface';
+import { fake_boards } from '../fakeData/board.fake';
 export interface BoardStoreState {
   boards: BoardBrief[];
   currentBoard: BoardDetail | undefined;
@@ -17,9 +18,9 @@ export const useBoardStore = defineStore('board', {
     }
   },
   getters: {
-    getSortedBoards: (state: BoardStoreState) => {
-      [...state.boards].sort((a: BoardBrief, b: BoardBrief) => a.order - b.order)
-    }
+    // getSortedBoards: (state: BoardStoreState) => {
+    //   [...state.boards].sort((a: BoardBrief, b: BoardBrief) => a.order - b.order)
+    // }
   },
   actions: {
     setCurrentBoard(boardId: string) {
@@ -41,8 +42,12 @@ export const useBoardStore = defineStore('board', {
         }
       }
     },
+    async getBoards() {
+      this.boards = [...fake_boards]
+      this.boards.sort((a, b) => b.order - a.order)  
+    },
     addBoard(board: BoardRequest) {
-      console.log('add board')
+      // console.log('add board')
       this.boards.unshift({
         id: uuid(),
         createdAt: new Date().toISOString(),

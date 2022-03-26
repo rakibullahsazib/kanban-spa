@@ -52,6 +52,7 @@ describe('add board buttons', () => {
     expect(boardStore.boards).toStrictEqual([])
     
     await findAddBoardTextBtn().trigger('click')
+    await nextTick()
     
     expect(findBoardModal().exists()).toBe(true)
   })
@@ -92,6 +93,13 @@ describe('board list', () => {
   })
 
   test('board list have the boards from store and respective edit and delete buttons', async () => {    
+    for(let i = 0; i < boardStore.boards.length; i++) {
+      expect(findBoardById(boardStore.boards[i].id).exists()).toBe(true)
+      expect(findBoardEditButtonByBoardId(boardStore.boards[i].id).exists()).toBe(true)
+      expect(findBoardDeleteButtonByBoardId(boardStore.boards[i].id).exists()).toBe(true)
+    }
+  })
+  test('boards are listed from high order to low', async () => {    
     for(let i = 0; i < boardStore.boards.length; i++) {
       expect(findBoardById(boardStore.boards[i].id).exists()).toBe(true)
       expect(findBoardEditButtonByBoardId(boardStore.boards[i].id).exists()).toBe(true)

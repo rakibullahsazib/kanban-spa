@@ -91,7 +91,7 @@ const filteredBoards = computed(() => {
   if (!searchInput.value) return boards.value
   return boards.value.filter(board => {
     return board.name.toLowerCase().indexOf(searchInput.value.toLowerCase()) > -1
-  }).sort((a, b) => b.order - a.order)
+  })
 })
 
 const isAddBoardModalShown = ref(false)

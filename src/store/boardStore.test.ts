@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid'
 import { BoardBrief, StageDetail } from './interface/board.interface'
 import { TaskDetail } from './interface/board.interface'
 import { getMaxOrder } from '../helpers/arrayMethods'
+import { fake_boards } from '../fakeData/board.fake'
 
 beforeAll(() => {
   setActivePinia(createPinia())
@@ -18,7 +19,7 @@ describe('Board CRUD operations', () => {
       description: 'Test Board Description',
       order: maxOrder + 1
     })
-    return boardStore.boards[boardStore.boards.length - 1].id
+    return boardStore.boards[0].id
   }
 
   beforeEach(() => {
@@ -34,11 +35,20 @@ describe('Board CRUD operations', () => {
   test('boards is empty initially', () => {
     expect(boardStore.boards).toStrictEqual([])
   })
+  test('get boards with sorted order', () => {
+    boardStore.getBoards()
+    const sorted_fake_boards = [...fake_boards].sort((a, b) => b.order - a.order)
+    for (let i = 0; i < boardStore.boards.length; i++) {
+      expect(boardStore.boards[i].name).toBe(sorted_fake_boards[i].name)
+      expect(boardStore.boards[i].id).toBe(sorted_fake_boards[i].id)
+      expect(boardStore.boards[i].description).toBe(sorted_fake_boards[i].description)
+    }
+  })
   test('add a board', () => {
     const boardId = createBoard()
-    expect(boardStore.boards[boardStore.boards.length - 1]).toBeDefined()
-    expect(boardStore.boards[boardStore.boards.length - 1].name).toBe('Test Board')
-    expect(boardStore.boards[boardStore.boards.length - 1].description).toBe('Test Board Description')
+    expect(boardStore.boards[0]).toBeDefined()
+    expect(boardStore.boards[0].name).toBe('Test Board')
+    expect(boardStore.boards[0].description).toBe('Test Board Description')
     // set the newly created board to current board
     expect(boardStore.currentBoard?.id).toBe(boardId)
   })
@@ -68,22 +78,31 @@ describe('Board CRUD operations', () => {
     expect(boardStore.currentBoard?.description).toBe('Updated Board Description')
   })
   test('delete a board', () => {
-    const boardId1 = createBoard()
     const boardId2 = createBoard()
+    const boardId1 = createBoard()
     boardStore.deleteBoard(boardId1)
     expect(boardStore.boards.length).toBe(1)
     expect(boardStore.boards[0].id).toBe(boardId2)
     boardStore.deleteBoard(boardId2)
     expect(boardStore.boards.length).toBe(0)
-  })
-  test('delete current board from boards', () => {
-    const boardId1 = createBoard()
+  }) 
+  test('set the first board as current board and delete it', () => {
     const boardId2 = createBoard()
+    const boardId1 = createBoard()
     boardStore.setCurrentBoard(boardId2)
     boardStore.deleteBoard(boardId2)
     expect(boardStore.boards.length).toBe(1)
     expect(boardStore.boards[0].id).toBe(boardId1)
     expect(boardStore.currentBoard?.id).toBe(boardId1)
+  })
+  test('set the second board as current board and delete it', () => {
+    const boardId2 = createBoard()
+    const boardId1 = createBoard()
+    boardStore.setCurrentBoard(boardId1)
+    boardStore.deleteBoard(boardId1)
+    expect(boardStore.boards.length).toBe(1)
+    expect(boardStore.boards[0].id).toBe(boardId2)
+    expect(boardStore.currentBoard?.id).toBe(boardId2)
   })
 })
 describe('Board Stage CRUD operations', () => {

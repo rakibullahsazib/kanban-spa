@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "vitest";
 import { v4 as uuid } from 'uuid'
-import { updateOrdersInArr } from "../updateOrdersInArr";
+import { updateOrdersInArr } from "./updateOrdersInArr";
 
 describe('update order of objects in array', () => {
   let testArr: {

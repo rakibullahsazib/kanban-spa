@@ -18,6 +18,7 @@ describe('different prop state', () => {
   test('show only input and hide label when label is not passed in props', async () => {
     wrapper = mount(TextInput, {
       props: {
+        limit: 10
       }
     })
     expect(findInput().exists()).toBe(true)
@@ -26,7 +27,8 @@ describe('different prop state', () => {
   test('show only input and hide label when label is not passed in props', async () => {
     wrapper = mount(TextInput, {
       props: {
-        label: 'Test'
+        label: 'Test',
+        limit: 10
       }
     })
     expect(findInput().exists()).toBe(true)
@@ -36,7 +38,8 @@ describe('different prop state', () => {
     wrapper = mount(TextInput, {
       props: {
         id: 'Test-id',
-        label: 'Test'
+        label: 'Test',
+        limit: 10
       }
     })
     expect(findInput().attributes('id')).toBe('Test-id')
@@ -48,7 +51,8 @@ describe('label lifting and events', () => {
   const createWrapper = () => {
     wrapper = mount(TextInput, {
       props: {
-        label: 'Label'
+        label: 'Label',
+        limit: 10
       }
     })
   }
@@ -60,6 +64,15 @@ describe('label lifting and events', () => {
   })
   test('emit input event on input change', async () => {
     await findInput().setValue('Test value')
+    expect(wrapper.emitted().inputChange).toBeTruthy()
+    expect(wrapper.emitted().inputChange[0]).toEqual(['Test value'])
+  })
+  test('emit trimmed value input change', async () => {
+    await findInput().setValue('  Test value  ')
+    expect(wrapper.emitted().inputChange[0]).toEqual(['Test value'])
+  })
+  test('emit substring within limit', async () => {
+    await findInput().setValue('  Test value astarstastras arst  ')
     expect(wrapper.emitted().inputChange).toBeTruthy()
     expect(wrapper.emitted().inputChange[0]).toEqual(['Test value'])
   })

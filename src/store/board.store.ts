@@ -43,7 +43,7 @@ export const useBoardStore = defineStore('board', {
     },
     addBoard(board: BoardRequest) {
       console.log('add board')
-      this.boards.push({
+      this.boards.unshift({
         id: uuid(),
         createdAt: new Date().toISOString(),
         ...board,
@@ -74,7 +74,11 @@ export const useBoardStore = defineStore('board', {
     deleteBoard(boardId: string) {
       // if deleting current board first change the current board to another one or undefined
       if (boardId === this.currentBoard?.id) {
-        this.setCurrentBoard(this.boards[0]?.id)
+        if (boardId !== this.boards[0]?.id) {
+          this.setCurrentBoard(this.boards[0]?.id)
+        } else {
+          this.setCurrentBoard(this.boards[1]?.id)
+        }
       }
       const boardIndex = this.boards.findIndex((b) => b.id === boardId)
       this.boards.splice(boardIndex, 1)

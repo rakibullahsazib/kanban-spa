@@ -3,7 +3,7 @@
     <div class="relative border rounded px-2 py-2" :class="error ? 'border-red' : 'border-grey-5'">    
       <textarea
         :id="id"
-        class="text-input relative px-2 pt-2 block w-full min-w-full bg-white bg-opacity-0 text-sm text-grey-9 focus:outline-none custom-scrollbar z-10"
+        class="text-input relative px-2 pt-1 block w-full min-w-full bg-white bg-opacity-0 text-sm text-grey-9 focus:outline-none custom-scrollbar z-10"
         :class="[error ? 'text-red' : 'text-grey-9', {'resize-none': !resize}]"
         :value="input"
         @input="changeInput"

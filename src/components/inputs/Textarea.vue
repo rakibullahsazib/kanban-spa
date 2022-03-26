@@ -4,6 +4,7 @@
       :id="id"
       class="text-input relative px-2 block w-full min-w-full bg-white bg-opacity-0 text-sm text-grey-9 focus:outline-none custom-scrollbar z-10"
       :class="[error ? 'text-red' : 'text-grey-9', {'resize-none': !resize}]"
+      :value="initialValue || ''"
       @input="changeInput"
       :style="{height: inputHeight}"
     >
@@ -21,16 +22,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-defineProps<{
+const props = defineProps<{
   id?: string,
   label?: string,
   inputHeight?: string,
   error?: boolean,
   resize?: boolean
+  initialValue?: string
 }>()
 const emit = defineEmits(['inputChange'])
 
-const input = ref('')
+const input = ref(props.initialValue || '')
 const changeInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   input.value = target.value

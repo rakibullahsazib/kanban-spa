@@ -5,6 +5,7 @@
       :id="id"
       class="text-input relative block w-full bg-white bg-opacity-0 text-sm text-grey-9 focus:outline-none z-10"
       :class="error ? 'text-red' : 'text-grey-9'"
+      :value="input"
       @input="changeInput"
     >
     <label
@@ -20,15 +21,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-defineProps<{
+const props = defineProps<{
   id?: string,
-  label?: string
-  error?: boolean
+  label?: string,
+  error?: boolean,
+  initialValue?: string
 }>()
 const emit = defineEmits(['inputChange'])
 
-const input = ref('')
+const input = ref(props.initialValue || '')
 const changeInput = (event: Event) => {
+  console.log('input changed')
   const target = event.target as HTMLInputElement
   input.value = target.value
   emit('inputChange', target.value)

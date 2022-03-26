@@ -11,12 +11,14 @@
                 <TextInput
                     id="board-name"
                     label="Board Title"
+                    :initialValue="board?.name"
                 />
                 <Textarea
                     id="board-description"
                     label="Description"
                     inputHeight="7rem"
                     class="mt-4"
+                    :initialValue="board?.description"
                 />
             </div>
             <Button
@@ -30,12 +32,24 @@
 
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import TextInput from '../inputs/TextInput.vue';
 import Textarea from '../inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
-defineProps<{
+import { BoardBrief } from '../../store/interface/board.interface';
+import { useBoardStore } from '../../store/board.store';
+const props = defineProps<{
   boardId?: string
 }>()
+const boardStore = useBoardStore()
+const board = ref<BoardBrief|undefined>(undefined)
+if (props.boardId) {
+    for (const b of boardStore.boards) {
+        if (b.id === props.boardId) {
+            board.value = b
+        }
+    }
+}
 const onConfirm = () => {
   console.log('confirm')
 }

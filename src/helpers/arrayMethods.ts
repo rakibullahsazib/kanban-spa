@@ -9,3 +9,11 @@ export const getMaxOrder = (arr: HasOrderAndId[]) : number => {
   }
   return maxOrder;
 }
+export const isNameDuplicatedCaseInsensitive = (name: string, arr: {name: string}[]): boolean => {
+  for (const item of arr) {
+    if (item.name.toLowerCase() === name.toLowerCase()) {
+      return true
+    }
+  }
+  return false
+}

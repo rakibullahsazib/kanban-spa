@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentBoard" class="border-b border-grey-5 pt-1 pb-3">
     <div class="relative flex items-center space-x-3">
-      <h2 class="pr-1 text-xl text-grey-9 font-semibold truncate">
+      <h2 class="pr-1 text-xl text-grey-9 font-semibold truncate" data-testid="board-title">
         {{ currentBoard.name }}
       </h2>
       <!-- Dropdown -->
@@ -10,6 +10,7 @@
           @click.stop="toggleCurrentDropdown('boards')"
           class="cursor-pointer w-6 h-6"
           src="/assets/icons/chevron-down.svg"
+          data-testid="dropdown-btn"
         >
         <transition name="toggle">
           <HeadlessSingleSelectDropdown
@@ -23,12 +24,12 @@
         </transition>
       </div>
       <!-- description -->
-      <div class="parent-hover relative">
+      <div class="parent-hover relative" data-testid="board-description">
         <img
           class="cursor-pointer w-5 h-5"
           src="/assets/icons/question.svg"
         >
-        <p class="child-visible absolute mt-2 -ml-10 w-56 px-3 py-2 text-xs text-grey-9 bg-white border border-grey-5 rounded shadow" style="max-width: 40rem;">
+        <p class="child-visible absolute mt-2 -ml-10 w-56 px-3 py-2 text-xs text-grey-9 bg-white border border-grey-5 rounded shadow" style="max-width: 40rem;" data-testid="board-description-message">
           {{ currentBoard.description }}
         </p>
       </div>
@@ -38,20 +39,31 @@
         class="cursor-pointer w-5 h-5"
         src="/assets/icons/edit.svg"
         data-testid="edit-btn"
+        title="Edit Board"
       >
+      <!-- delete btn -->
       <img
         @click="boardToBeDeleted = currentBoard?.id"
         class="cursor-pointer w-5 h-5"
         src="/assets/icons/trash.svg"
-        data-testid="edit-btn"
+        data-testid="delete-btn"
+        title="Delete Board"
+      >
+      <!-- add board btn -->
+      <img
+        @click="isBoardModalShown = true"
+        class="cursor-pointer w-5 h-5"
+        src="/assets/icons/plus-circle-transparent.svg"
+        data-testid="add-board-btn"
+        title="Add Board"
       >
     </div>
     <teleport to="body">
       <transition name="fade">
       <BoardModal
-        v-if="boardToBeEdited"
-        @closeModal="boardToBeEdited = undefined"
-        :board="boards.find(b => b.id === currentBoard?.id)"
+        v-if="isBoardModalShown || boardToBeEdited"
+        @closeModal="closeBoardModal"
+        :board="boards.find(b => b.id === boardToBeEdited)"
         class="z-30"
         data-testid="add-edit-board-modal"
       />
@@ -84,7 +96,13 @@ const boardStore = useBoardStore()
 const boards = computed(() => boardStore.boards)
 const currentBoard = computed(() => boardStore.currentBoard)
 const setCurrentBoard = boardStore.setCurrentBoard
+
+const isBoardModalShown = ref(false)
 const boardToBeEdited = ref<string|undefined>(undefined)
+const closeBoardModal = () => {
+  isBoardModalShown.value = false
+  boardToBeEdited.value = undefined
+}
 
 const boardToBeDeleted = ref<string|undefined>(undefined)
 const closeConfirmationModal = () => {

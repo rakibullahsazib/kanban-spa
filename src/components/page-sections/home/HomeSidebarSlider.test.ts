@@ -118,7 +118,14 @@ describe('board list', () => {
     await findBoardEditButtonByBoardId(boardStore.boards[0].id).trigger('click')
     expect(findBoardModal().exists()).toBe(true)
   })
-  test('clicking on board edit button opens up confirmation modal', async () => {
+  test('opened boards modal emits closeModal and it gets closed', async () => {
+    await findBoardEditButtonByBoardId(boardStore.boards[0].id).trigger('click')
+    expect(findBoardModal().exists()).toBe(true)
+    await findBoardModal().vm.$emit('closeModal')
+    expect(findBoardModal().exists()).toBe(false)
+  })
+
+  test('clicking on board delete button opens up confirmation modal', async () => {
     await findBoardDeleteButtonByBoardId(boardStore.boards[0].id).trigger('click')
     expect(findConfirmationModal().exists()).toBe(true)
   })
@@ -138,5 +145,4 @@ describe('board list', () => {
     expect(findBoardById(id).exists()).toBe(false)
     expect(findConfirmationModal().exists()).toBe(false)
   })
-
 })

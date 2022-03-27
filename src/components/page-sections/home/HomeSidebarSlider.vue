@@ -4,7 +4,7 @@
   >
     <section class="w-56">
       <HeaderAddButton
-        @add="isAddBoardModalShown = true"
+        @add="isBoardModalShown = true"
         title="Boards"
       />
       <div v-if="!boards.length" class="mt-2 text-grey-7 text-xs">
@@ -12,7 +12,7 @@
           No board created yet.
         </p>
         <button
-          @click="isAddBoardModalShown = true"
+          @click="isBoardModalShown = true"
           class="mt-1 text-grey-9 underline focus:outline-none"
           data-testid="add-board-text-btn"
         >
@@ -47,7 +47,7 @@
             :data-testid="`board_${board.id}_edit`"
           >
           <img
-            @click.stop="deleteBoard(board.id)"
+            @click.stop="boardToBeDeleted = board.id"
             src="/assets/icons/trash.svg" alt=""
             class="child-visible cursor-pointer w-4 h-4"
             :data-testid="`board_${board.id}_delete`"
@@ -58,9 +58,19 @@
     <teleport to="body">
       <transition name="fade">
       <BoardModal
-        v-if="isAddBoardModalShown || boardToBeEdited"
+        v-if="isBoardModalShown || boardToBeEdited"
         @closeModal="closeBoardModal"
         :board="boards.find(b => b.id === boardToBeEdited)"
+        class="z-30"
+      />
+      <ConfirmationModal
+        v-else-if="boardToBeDeleted"
+        @confirm="deleteBoard"
+        @closeModal="closeConfirmationModal"
+        title="Delete Board ?"
+        :message="deleteBoardMessage"
+        yesBtn="Yes, Delete"
+        noBtn="Cancel"
         class="z-30"
       />
       </transition>
@@ -75,13 +85,14 @@ import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';
 import BoardModal from '../../modals/BoardModal.vue';
+import ConfirmationModal from '../../modals/ConfirmationModal.vue';
+import { deleteBoardMessage } from '../../../helpers/messages'
 
 const boardStore = useBoardStore()
 
 const boards = computed(() => boardStore.boards)
 const currentBoard = computed(() => boardStore.currentBoard)
 const setCurrentBoard = boardStore.setCurrentBoard
-const deleteBoard = boardStore.deleteBoard
 
 const searchInput = ref('')
 const changeSearchInput = (value: string) => {
@@ -94,11 +105,21 @@ const filteredBoards = computed(() => {
   })
 })
 
-const isAddBoardModalShown = ref(false)
+const isBoardModalShown = ref(false)
 const boardToBeEdited = ref<string|undefined>(undefined)
 const closeBoardModal = () => {
-  isAddBoardModalShown.value = false
+  isBoardModalShown.value = false
   boardToBeEdited.value = undefined
+}
+
+const boardToBeDeleted = ref<string|undefined>(undefined)
+const closeConfirmationModal = () => {
+  boardToBeDeleted.value = undefined
+}
+const deleteBoard = () => {
+  if (!boardToBeDeleted.value) return
+  boardStore.deleteBoard(boardToBeDeleted.value)
+  closeConfirmationModal()
 }
 
 </script>

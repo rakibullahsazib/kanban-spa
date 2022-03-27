@@ -17,6 +17,28 @@ let wrapper: VueWrapper
 const findTextInput = () => wrapper.findComponent(TextInput)
 const findTextareaInput = () => wrapper.findComponent(Textarea)
 const findBtn = () => wrapper.findComponent(Button)
+const findCrossImg = () => wrapper.find(`[data-testid=cross-img]`)
+
+describe('close modal events', () => {
+  beforeEach(() => {
+    wrapper = mount(BoardModal, {
+      global: { 
+        plugins: [ createTestingPinia({ createSpy: fn, stubActions: false }) ] 
+      }
+    })
+  })
+  afterEach(() => {
+    wrapper.unmount()
+  })
+  test('emit close modal on background click', async () => {
+    await wrapper.trigger('click')
+    expect(wrapper.emitted().closeModal).toBeTruthy()
+  })
+  test('emit close modal on cross img click', async () => {
+    await findCrossImg().trigger('click')
+    expect(wrapper.emitted().closeModal).toBeTruthy()
+  })
+})
 
 describe('Case: Add board, components exists', () => {
   const createWrapper = () => {

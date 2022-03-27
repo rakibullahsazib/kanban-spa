@@ -1,7 +1,7 @@
 <template>
     <div @click.self.stop="$emit('closeModal')" class="fixed inset-0  flex justify-center items-center bg-grey-9 bg-opacity-60">
         <div @click.stop class="modal-viewport relative px-14 py-12 bg-white overflow-y-auto custom-scrollbar rounded">
-            <img @click="$emit('closeModal')" class="absolute top-6 right-6 w-6 h-6 cursor-pointer" src="/assets/icons/cross-circle.svg" alt="Close">
+            <img @click="$emit('closeModal')" class="absolute top-6 right-6 w-6 h-6 cursor-pointer" src="/assets/icons/cross-circle.svg" alt="Close" data-testid="cross-img">
 
             <h6 class="text-center text-grey-8 font-semibold text-lg">
               {{ board ? 'Edit' : 'Add' }} Board

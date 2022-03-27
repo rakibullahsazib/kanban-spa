@@ -2,6 +2,7 @@ import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import HomeSidebarSlider from './HomeSidebarSlider.vue'
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue'
 import BoardModal from '../../modals/BoardModal.vue'
+import ConfirmationModal from '../../modals/ConfirmationModal.vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { useBoardStore } from '../../../store/board.store'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
@@ -32,6 +33,7 @@ const createWrapper = () => {
 // helpers
 const findAddBoardTextBtn = () => wrapper.find('[data-testid=add-board-text-btn]')
 const findBoardModal = () => wrapper.findComponent(BoardModal)
+const findConfirmationModal = () => wrapper.findComponent(ConfirmationModal)
 const findBoardById = (id: string) => wrapper.find(`[data-testid=board_${id}]`)
 const findBoardEditButtonByBoardId = (id: string) => wrapper.find(`[data-testid=board_${id}_edit]`)
 const findBoardDeleteButtonByBoardId = (id: string) => wrapper.find(`[data-testid=board_${id}_delete]`)
@@ -116,17 +118,25 @@ describe('board list', () => {
     await findBoardEditButtonByBoardId(boardStore.boards[0].id).trigger('click')
     expect(findBoardModal().exists()).toBe(true)
   })
-  test('deleting a board from board list deletes the board board from store and ui', async () => {
-    // deleting all the boards in store from ui
-    for(let i = 0; i < fake_boards.length; i++) {
-      const id = fake_boards[i].id
-      await findBoardDeleteButtonByBoardId(id).trigger('click')
-      expect(boardStore.boards.length).toBe(fake_boards.length - i - 1)
-      expect(boardStore.boards.find(b => b.id === id)).toBeUndefined()
-      expect(findBoardById(id).exists()).toBe(false)
-    }
-
-    expect(boardStore.boards).toStrictEqual([])
+  test('clicking on board edit button opens up confirmation modal', async () => {
+    await findBoardDeleteButtonByBoardId(boardStore.boards[0].id).trigger('click')
+    expect(findConfirmationModal().exists()).toBe(true)
+  })
+  test('opened confirmation modal emits closeModal and it gets closed', async () => {
+    await findBoardDeleteButtonByBoardId(boardStore.boards[0].id).trigger('click')
+    expect(findConfirmationModal().exists()).toBe(true)
+    await findConfirmationModal().vm.$emit('closeModal')
+    expect(findConfirmationModal().exists()).toBe(false)
+  })
+  test('clicking on board delete button opens confirmation modal, on confirm the board gets deleted from store and then the modal gets closed', async () => {
+    const id = fake_boards[1].id
+    await findBoardDeleteButtonByBoardId(id).trigger('click')
+    expect(findConfirmationModal().exists()).toBe(true)
+    await findConfirmationModal().vm.$emit('confirm')
+    expect(boardStore.boards.length).toBe(fake_boards.length - 1)
+    expect(boardStore.boards.find(b => b.id === id)).toBeUndefined()
+    expect(findBoardById(id).exists()).toBe(false)
+    expect(findConfirmationModal().exists()).toBe(false)
   })
 
 })

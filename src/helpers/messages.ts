@@ -1,0 +1,1 @@
+export const deleteBoardMessage = 'Deleting this board will delete all the stages and tasks inside it. Are you sure, you want to continue ?'

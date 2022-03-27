@@ -40,7 +40,7 @@
         data-testid="edit-btn"
       >
       <img
-        @click="deleteBoard(currentBoard?.id)"
+        @click="boardToBeDeleted = currentBoard?.id"
         class="cursor-pointer w-5 h-5"
         src="/assets/icons/trash.svg"
         data-testid="edit-btn"
@@ -55,6 +55,16 @@
         class="z-30"
         data-testid="add-edit-board-modal"
       />
+      <ConfirmationModal
+        v-else-if="boardToBeDeleted"
+        title="Delete Board ?"
+        :message="deleteBoardMessage"
+        yesBtn="Yes, Delete"
+        noBtn="Cancel"
+        @confirm="deleteBoard"
+        @closeModal="closeConfirmationModal"
+        class="z-30"
+      />
       </transition>
     </teleport>
   </div>
@@ -66,6 +76,8 @@ import { useBoardStore } from '../../../store/board.store';
 import { useRootStore } from '../../../store/root.store';
 import HeadlessSingleSelectDropdown from '../../inputs/dropdowns/HeadlessSingleSelectDropdown.vue';
 import BoardModal from '@/components/modals/BoardModal.vue';
+import ConfirmationModal from '../../modals/ConfirmationModal.vue';
+import { deleteBoardMessage } from '../../../helpers/messages'
 
 const rootStore = useRootStore()
 const boardStore = useBoardStore()
@@ -73,9 +85,15 @@ const boards = computed(() => boardStore.boards)
 const currentBoard = computed(() => boardStore.currentBoard)
 const setCurrentBoard = boardStore.setCurrentBoard
 const boardToBeEdited = ref<string|undefined>(undefined)
-const deleteBoard = (boardId: string|undefined) => {
-  if(!boardId) return
-  boardStore.deleteBoard(boardId)
+
+const boardToBeDeleted = ref<string|undefined>(undefined)
+const closeConfirmationModal = () => {
+  boardToBeDeleted.value = undefined
+}
+const deleteBoard = () => {
+  if (!boardToBeDeleted.value) return
+  boardStore.deleteBoard(boardToBeDeleted.value)
+  closeConfirmationModal()
 }
 
 let currentDropdown = computed(() => rootStore.currentDropdown)

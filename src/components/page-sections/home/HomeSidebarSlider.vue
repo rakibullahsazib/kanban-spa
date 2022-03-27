@@ -60,7 +60,7 @@
       <BoardModal
         v-if="isAddBoardModalShown || boardToBeEdited"
         @closeModal="closeBoardModal"
-        :boardId="boardToBeEdited"
+        :board="boards.find(b => b.id === boardToBeEdited)"
         class="z-30"
       />
       </transition>

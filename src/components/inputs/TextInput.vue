@@ -3,7 +3,7 @@
     <input
       type="text"
       :id="id"
-      class="text-input relative block w-full bg-white bg-opacity-0 text-sm text-grey-9 transition-300 focus:outline-none z-10"
+      class="text-input relative block w-full bg-white bg-opacity-0 text-sm text-grey-9 transition-colors duration-300 focus:outline-none z-10"
       :class="errorMessage ? 'text-red' : 'text-grey-9'"
       :value="input"
       @input="changeInput"
@@ -17,7 +17,7 @@
       {{ label }}
     </label>
     <transition name="fade">
-      <p v-if="errorMessage" class="absolute top-full mt-1 text-xs font-semibold text-red">
+      <p v-if="errorMessage" class="absolute max-w-full top-full mt-1 text-xs font-semibold text-red">
         {{ errorMessage }}
       </p>
     </transition>

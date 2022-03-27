@@ -51,7 +51,7 @@
       <BoardModal
         v-if="boardToBeEdited"
         @closeModal="boardToBeEdited = undefined"
-        :boardId="currentBoard.id"
+        :board="boards.find(b => b.id === currentBoard?.id)"
         class="z-30"
         data-testid="add-edit-board-modal"
       />

@@ -29,7 +29,7 @@ describe('disabled state', () => {
     expect(wrapper.text()).toBe('Title')
   })
   test('button disabled', () => {
-    expect(wrapper.attributes('disabled')).toBe('true')
+    expect(wrapper.props('disabled')).toBeTruthy()
   })
 })
 
@@ -51,7 +51,7 @@ describe('not disabled state', () => {
     expect(wrapper.text()).toBe('Title')
   })
   test('button not disabled', () => {
-    expect(wrapper.attributes('disabled')).toBe('false')
+    expect(wrapper.attributes('disabled')).toBeFalsy()
   })
 })
 describe('not disabled state when disabled is false', () => {
@@ -73,7 +73,7 @@ describe('not disabled state when disabled is false', () => {
     expect(wrapper.text()).toBe('Title')
   })
   test('button not disabled', () => {
-    expect(wrapper.attributes('disabled')).toBe('false')
+    expect(wrapper.attributes('disabled')).toBeFalsy()
   })
 })
 

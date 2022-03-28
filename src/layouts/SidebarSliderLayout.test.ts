@@ -36,11 +36,11 @@ test('on toggle button click change states of slider, its content and rotate but
   // collapse content
   await findToggleBtn().trigger('click')
   expect(wrapper.classes()).toContain('collapsed')
-  expect(getSliderContent().attributes('style')).toContain('display: none')
+  expect(getSliderContent().isVisible()).toBe(false)
   expect(findToggleBtn().classes()).toContain('rotate-180')
   // expand content
   await findToggleBtn().trigger('click')
   expect(wrapper.classes()).toContain('expanded')
-  expect(getSliderContent().attributes('style')).toBe(undefined)
+  expect(getSliderContent().isVisible()).toBe(true)
   expect(findToggleBtn().classes()).not.toContain('rotate-180')
 })

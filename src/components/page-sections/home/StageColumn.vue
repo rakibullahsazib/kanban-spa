@@ -1,25 +1,23 @@
 <template>
-  <div class="">
-    <div class="px-2 pb-2">
-      <draggable
-        item-key="id"
-        tag="ul"
-        :animation="300"
-        :list="stage.tasks"
-        group="boardTasks"
-        handle=".task-handle"
-        @end="onTaskDragEnd"
-        class="list-group"
-      >
-        <template #item="{element}">
-          <TaskCard
-            @click="taskToBeEdited = element.id"
-            :task="element"
-            class="mt-2 w-56"
-          />
-        </template>
-      </draggable>
-    </div>
+  <div class="px-2 pb-2 flex flex-col">
+    <draggable
+      item-key="id"
+      tag="ul"
+      :animation="300"
+      :list="stage.tasks"
+      group="boardTasks"
+      handle=".task-handle"
+      @end="onTaskDragEnd"
+      class="flex-grow"
+    >
+      <template #item="{element}">
+        <TaskCard
+          @click="taskToBeEdited = element.id"
+          :task="element"
+          class="mt-2 w-56"
+        />
+      </template>
+    </draggable>
     <teleport to="body">
       <transition name="fade">
       <TaskModal

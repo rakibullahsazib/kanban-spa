@@ -2,7 +2,7 @@
   <div class="flex w-full">
     <HomeSldebarSlider class="flex-shrink-0" />
     <!-- Right Side Content -->
-    <div v-if="currentBoard" class="flex-grow px-4 py-2">
+    <div v-if="currentBoard" class="flex-grow flex flex-col px-4 py-2">
       <HomeHeader />
       <!-- Stage Headers -->
       <draggable
@@ -13,7 +13,7 @@
         group="boardStages"
         handle=".stage-handle"
         @end="onStageDragEnd"
-        class="list-group flex border-b-2 border-dashed border-grey-1"
+        class="flex border-b-2 border-dashed border-grey-1"
       >
         <template #item="{element}">
           <StageColumnHeader
@@ -23,12 +23,12 @@
         </template>
       </draggable>
       <!-- Stage Columns -->
-      <div class="flex border-b-2 border-dashed border-grey-1">
+      <div class="flex-grow flex border-b-2 border-dashed border-grey-1">
         <StageColumn
           v-for="stage in currentBoard.stages"
           :key="stage.id"
           :stage="stage"
-          class="flex-shrink-0 w-60 border-r-2 border-dashed border-grey-1"
+          class="flex-shrink-0 h-full overflow-x-hidden overflow-y-auto w-60 border-r-2 border-dashed border-grey-1"
         />
       </div>
     </div>

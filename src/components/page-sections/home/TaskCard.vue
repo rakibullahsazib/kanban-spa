@@ -1,0 +1,76 @@
+<template>
+  <div class="task-handle relative rounded cursor-move" :style="{backgroundColor: task.color}">
+    <!-- Status -->
+    <img
+      v-if="taskStatus"
+      :src="`/assets/icons/${taskStatus.icon}`"
+      class="absolute w-4 h-4 right-2 top-2"
+      :alt="taskStatus.name"
+      :title="taskStatus.name"
+    >
+    <!-- Head -->
+    <div class="flex space-x-2 p-2 border border-white border-opacity-50">
+      <!-- Assignee -->
+      <div
+        v-if="task.assignee"
+        class="flex-shrink-0 w-10 h-10 flex-center uppercase bg-white bg-opacity-50 text-black font-semibold text-xs rounded-full"
+        :title="task.assignee"
+      >
+        {{ getInitials(task.assignee) }}
+      </div>
+      <div
+        v-else
+        class="flex-shrink-0 w-10 h-10 flex-center uppercase bg-white opacity-50 text-black font-semibold text-lg rounded-full"
+      >
+        ?
+      </div>
+      <div>
+        <p class="text-xs opacity-50 font-semibold">
+          Due: {{ getDateMonthYearFromISO(task.dueDate) }}
+        </p>
+        <!-- Checklist items -->
+        <div
+          title="checklist"
+          class="mt-1 flex items-center space-x-1"
+        >
+          <img class="w-4 h-4" src="/assets/icons/checklist.svg">
+          <p class="text-xs opacity-50">
+            {{ noOfCompletedChecklistItems }}/{{ task.checklist.length }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Title -->
+    <h5 class="p-2 text-sm text-black opacity-70 font-semibold">
+      {{ task.name }}
+    </h5>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from '@vue/reactivity';
+import { TaskDetail } from '../../../store/interface/board.interface';
+import { getDateMonthYearFromISO } from '../../../helpers/dateFormatter'
+import { getInitials } from '../../../helpers/stringMethods'
+import { useBoardStore } from '../../../store/board.store';
+
+const props = defineProps<{
+  task: TaskDetail
+}>()
+
+const boardStore = useBoardStore()
+const noOfCompletedChecklistItems = computed(() => {
+  let completed = 0
+  for (const c of props.task.checklist) {
+    if (c.completed) completed++
+  }
+  return completed
+})
+const taskStatus = computed(() => {
+  return boardStore.taskStatuses.find(s => s.id === props.task.statusId)
+})
+</script>
+
+<style scoped>
+
+</style>

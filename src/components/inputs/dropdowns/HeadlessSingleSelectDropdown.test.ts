@@ -16,7 +16,7 @@ describe('dropdown hidden', () => {
         isDropdownShown: false
       }
     })
-    expect(wrapper.attributes('style')).toContain('display: none')
+    expect(wrapper.isVisible()).toBe(false)
   })
   test('dropdown should be hidden if no option is passed', async () => {
     wrapper = mount(HeadlessSingleSelectDropdown, {
@@ -25,7 +25,7 @@ describe('dropdown hidden', () => {
         isDropdownShown: true
       }
     })
-    expect(wrapper.attributes('style')).toContain('display: none')
+    expect(wrapper.isVisible()).toBe(false)
   })
   test('dropdown should be hidden if no option is passed and isDropdownShown is false', async () => {
     wrapper = mount(HeadlessSingleSelectDropdown, {
@@ -34,7 +34,7 @@ describe('dropdown hidden', () => {
         isDropdownShown: false
       }
     })
-    expect(wrapper.attributes('style')).toContain('display: none')
+    expect(wrapper.isVisible()).toBe(false)
   })
 })
 describe('dropdown visible', () => {

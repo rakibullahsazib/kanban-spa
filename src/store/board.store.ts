@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
 import { v4 as uuid } from 'uuid'
-import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest } from './interface/board.interface'
+import { BoardBrief, BoardDetail, BoardRequest, BoardUpdateRequest, StageRequest, StageUpdateRequest, TaskStatus } from './interface/board.interface'
 import { TaskRequest, TaskUpdateRequest } from './interface/board.interface';
 import { updateOrdersInArr } from '../helpers/updateOrdersInArr';
 import { HasOrderAndId } from './interface/common.interface';
-import { fake_boards } from '../fakeData/board.fake';
+import { fake_boards, fake_currentBoard, fake_taskStatuses } from '../fakeData/board.fake';
 export interface BoardStoreState {
   boards: BoardBrief[];
   currentBoard: BoardDetail | undefined;
+  taskStatuses: TaskStatus[]
 }
 
 export const useBoardStore = defineStore('board', {
@@ -15,6 +16,7 @@ export const useBoardStore = defineStore('board', {
     return {
       boards: [],
       currentBoard: undefined,
+      taskStatuses: []
     }
   },
   getters: {
@@ -41,6 +43,9 @@ export const useBoardStore = defineStore('board', {
           return
         }
       }
+    },
+    async getCurrentBoard() {
+      this.currentBoard = fake_currentBoard
     },
     async getBoards() {
       this.boards = [...fake_boards]
@@ -147,5 +152,8 @@ export const useBoardStore = defineStore('board', {
       if (taskIndex === undefined) return
       this.currentBoard.stages[stageIndex].tasks.splice(taskIndex, 1)
     },
+    getTaskStatuses() {
+      this.taskStatuses = fake_taskStatuses
+    }
   }
 })

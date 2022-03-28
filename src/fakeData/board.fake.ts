@@ -1,4 +1,4 @@
-import { BoardBrief, BoardDetail } from "../store/interface/board.interface";
+import { BoardBrief, BoardDetail, TaskStatus } from "../store/interface/board.interface";
 
 export const fake_boards: BoardBrief[] = [
   {
@@ -49,7 +49,84 @@ export const fake_currentBoard: BoardDetail = {
       id: '1',
       name: 'Backlog',
       order: 1,              
+      tasks: [
+        {
+          id: '1',
+          name: 'Backlog Task 1',
+          description: 'Backlog Task 1 description',
+          color: '#99F997',
+          order: 1,
+          stageId: '1',
+          assignee: 'Rakib Sazib',
+          statusId: '3',
+          dueDate: new Date().toISOString(),
+          checklist: [
+            {
+              id: '1',
+              name: 'Checklist 1',
+              completed: true
+            },
+            {
+              id: '2',
+              name: 'Checklist 2',
+              completed: true
+            }
+          ]
+        },
+        {
+          id: '2',
+          name: 'Backlog Task 2',
+          description: 'Backlog Task 2 description',
+          color: '#99F997',
+          order: 2,
+          stageId: '1',
+          assignee: 'Rakib',
+          statusId: '1',
+          dueDate: new Date().toISOString(),
+          checklist: [
+            {
+              id: '3',
+              name: 'Checklist 3',
+              completed: true
+            },
+            {
+              id: '4',
+              name: 'Checklist 4',
+              completed: false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Stage 2',
+      order: 2,              
       tasks: []
-    }
+    },
+    {
+      id: '3',
+      name: 'Stage 3',
+      order: 3,              
+      tasks: []
+    },
   ]
 }
+
+export const fake_taskStatuses: TaskStatus[] = [
+  {
+    id: '1',
+    name: 'Ongoing',
+    icon: 'ongoing.svg'
+  },
+  {
+    id: '2',
+    name: 'Stuck',
+    icon: 'stuck.svg'
+  },
+  {
+    id: '3',
+    name: 'Completed',
+    icon: 'completed.svg'
+  }
+] 

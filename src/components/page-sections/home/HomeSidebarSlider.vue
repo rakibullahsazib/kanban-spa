@@ -86,7 +86,7 @@ import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
 import SearchInput from '../../inputs/SearchInput.vue';
 import BoardModal from '../../modals/BoardModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
-import { deleteBoardMessage } from '../../../helpers/messages'
+import { deleteBoardMessage } from '../../../helpers/data/messages'
 
 const boardStore = useBoardStore()
 

@@ -89,7 +89,7 @@ import { useRootStore } from '../../../store/root.store';
 import HeadlessSingleSelectDropdown from '../../inputs/dropdowns/HeadlessSingleSelectDropdown.vue';
 import BoardModal from '@/components/modals/BoardModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
-import { deleteBoardMessage } from '../../../helpers/messages'
+import { deleteBoardMessage } from '../../../helpers/data/messages'
 
 const rootStore = useRootStore()
 const boardStore = useBoardStore()

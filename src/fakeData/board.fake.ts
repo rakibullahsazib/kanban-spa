@@ -95,7 +95,43 @@ export const fake_currentBoard: BoardDetail = {
               completed: false
             }
           ]
-        }
+        },
+        {
+          id: '3',
+          name: 'Backlog Task 3',
+          description: 'Backlog Task 1 description',
+          color: '#99F997',
+          order: 3,
+          stageId: '1',
+          assignee: 'Rakib Sazib',
+          statusId: '2',
+          dueDate: new Date().toISOString(),
+          checklist: []
+        },
+        {
+          id: '4',
+          name: 'Backlog Task 4',
+          description: 'Backlog Task 1 description',
+          color: '#99F997',
+          order: 3,
+          stageId: '1',
+          assignee: 'Rakib Sazib',
+          statusId: '2',
+          dueDate: new Date().toISOString(),
+          checklist: []
+        },
+        {
+          id: '5',
+          name: 'Backlog Task 5',
+          description: 'Backlog Task 1 description',
+          color: '#99F997',
+          order: 5,
+          stageId: '1',
+          assignee: 'Rakib Sazib',
+          statusId: '2',
+          dueDate: new Date().toISOString(),
+          checklist: []
+        },
       ]
     },
     {

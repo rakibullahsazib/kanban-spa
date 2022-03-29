@@ -23,7 +23,8 @@
     <!-- Add stage btn -->
     <img
       @click="$emit('addStage')"
-      class="absolute -right-2 cursor-pointer w-4 h-4"
+      class="absolute cursor-pointer w-4 h-4"
+      style="right: -0.55rem"
       src="/assets/icons/plus-circle.svg"
       data-testid="add-stage-btn"
       title="Add Stage"
@@ -50,7 +51,7 @@ import { ref } from 'vue'
 import { StageDetail } from '../../../store/interface/board.interface';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
 import { useBoardStore } from '../../../store/board.store';
-import { deleteStageMessage } from '../../../helpers/messages'
+import { deleteStageMessage } from '../../../helpers/data/messages'
 
 defineProps<{
   stage: StageDetail

@@ -1,5 +1,13 @@
 <template>
   <div class="px-2 pb-2 flex flex-col">
+    <!-- Add Task Button -->
+    <ButtonWithIcon
+      v-if="stage.name === 'Backlog'"
+      @click="isTaskModalShown = true"
+      title="Add Task"
+      icon="plus-circle-black.svg"
+      class="sticky top-2"
+    />
     <draggable
       item-key="id"
       tag="ul"
@@ -8,13 +16,13 @@
       group="boardTasks"
       handle=".task-handle"
       @end="onTaskDragEnd"
-      class="flex-grow"
+      class="mt-4 flex-grow overflow-x-hidden overflow-y-auto"
     >
       <template #item="{element}">
         <TaskCard
           @click="taskToBeEdited = element.id"
           :task="element"
-          class="mt-2 w-56"
+          class="mb-2 w-56"
         />
       </template>
     </draggable>
@@ -23,7 +31,7 @@
       <TaskModal
         v-if="isTaskModalShown || taskToBeEdited"
         @closeModal="closeTaskModal"
-        :board="stage.tasks.find(b => b.id === taskToBeEdited)"
+        :task="stage.tasks.find(b => b.id === taskToBeEdited)"
         class="z-30"
       />
       <ConfirmationModal
@@ -51,7 +59,8 @@ import StageColumnHeader from './StageColumnHeader.vue';
 import TaskCard from './TaskCard.vue';
 import TaskModal from '../../modals/TaskModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
-import { deleteTaskMessage } from '../../../helpers/messages'
+import { deleteTaskMessage } from '../../../helpers/data/messages'
+import ButtonWithIcon from '../../buttons/ButtonWithIcon.vue';
 const props = defineProps<{
   stage: StageDetail
 }>()

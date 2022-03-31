@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { checkStringLimit } from '../../helpers/stringMethods';
+import { checkStringLimit } from '../../../helpers/stringMethods';
 const props = defineProps<{
   id?: string,
   label?: string,

@@ -1,7 +1,7 @@
 import { expect, test, beforeEach, afterEach } from "vitest";
 import { mount } from '@vue/test-utils'
 import { VueWrapper } from "@vue/test-utils";
-import SearchInput from './SearchInput.vue'
+import SearchInput from '../text-inputs/SearchInput.vue'
 
 // render factory
 let wrapper: VueWrapper

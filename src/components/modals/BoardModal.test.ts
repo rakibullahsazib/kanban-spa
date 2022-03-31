@@ -1,7 +1,7 @@
 import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import BoardModal from './BoardModal.vue'
-import TextInput from '../inputs/TextInput.vue';
-import Textarea from '../inputs/Textarea.vue';
+import TextInput from '../inputs/text-inputs/TextInput.vue';
+import Textarea from '../inputs/text-inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
 import { mount, VueWrapper } from '@vue/test-utils'
 import { useBoardStore } from '../../store/board.store'

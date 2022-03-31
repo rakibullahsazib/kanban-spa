@@ -1,5 +1,5 @@
 <template>
-  <div class="task-handle relative rounded cursor-move" :style="{backgroundColor: task.color}">
+  <div class="task-handle relative rounded cursor-pointer" :style="{backgroundColor: task.color}">
     <!-- Status -->
     <img
       v-if="taskStatus"

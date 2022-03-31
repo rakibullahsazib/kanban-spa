@@ -39,8 +39,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import TextInput from '../inputs/TextInput.vue';
-import Textarea from '../inputs/Textarea.vue';
+import TextInput from '../inputs/text-inputs/TextInput.vue';
+import Textarea from '../inputs/text-inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
 import { BoardBrief, BoardUpdateRequest } from '../../store/interface/board.interface';
 import { useBoardStore } from '../../store/board.store';

@@ -55,6 +55,7 @@ export interface TaskDetail extends TaskRequest{
 
 export interface TaskChecklistItemRequest {
   name: string;
+  taskId: string;
 }
 export interface TaskChecklistItem extends TaskChecklistItemRequest {
   id: string;

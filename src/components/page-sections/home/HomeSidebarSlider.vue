@@ -83,7 +83,7 @@ import { computed, ref } from 'vue';
 import { useBoardStore } from '../../../store/board.store'
 import SidebarSliderLayout from '../../../layouts/SidebarSliderLayout.vue';
 import HeaderAddButton from '../../buttons/HeaderAddButton.vue';
-import SearchInput from '../../inputs/SearchInput.vue';
+import SearchInput from '../../inputs/text-inputs/SearchInput.vue';
 import BoardModal from '../../modals/BoardModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
 import { deleteBoardMessage } from '../../../helpers/data/messages'

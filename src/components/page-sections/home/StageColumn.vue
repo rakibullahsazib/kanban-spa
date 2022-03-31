@@ -55,12 +55,12 @@ import { useBoardStore } from '../../../store/board.store'
 import draggable from 'vuedraggable'
 
 import { StageDetail } from '../../../store/interface/board.interface';
-import StageColumnHeader from './StageColumnHeader.vue';
 import TaskCard from './TaskCard.vue';
 import TaskModal from '../../modals/TaskModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
 import { deleteTaskMessage } from '../../../helpers/data/messages'
 import ButtonWithIcon from '../../buttons/ButtonWithIcon.vue';
+
 const props = defineProps<{
   stage: StageDetail
 }>()

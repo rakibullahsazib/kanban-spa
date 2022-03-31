@@ -93,6 +93,11 @@
   dependencies:
     vue-demi "*"
 
+"@popperjs/core@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.0.tgz#0e1bdf8d021e7ea58affade33d9d607e11365915"
+  integrity sha512-NMrDy6EWh9TPdSRiHmHH2ye1v5U0gBD7pRYwSwJvomx7Bm4GG04vu63dYiVzebLOx2obPpJugew06xVP0Nk7hA==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
@@ -114,6 +119,11 @@
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
   integrity sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==
+
+"@types/lodash@^4.14.165":
+  version "4.14.180"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
+  integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -671,6 +681,16 @@ data-urls@^3.0.1:
     abab "^2.0.3"
     whatwg-mimetype "^3.0.0"
     whatwg-url "^10.0.0"
+
+date-fns-tz@^1.0.12:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.3.1.tgz#88b6374e5a74cfb11ec2d2b120cfe0bc02eeb862"
+  integrity sha512-Uy+wph6HcQ0IG8TWbVyXicgDmB1zdvb0CoIknZQaxiTun4uSfxLR+8gSTC2C3KCLq+0fEIuEtJ/ORDRIn6doQw==
+
+date-fns@^2.16.1:
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
+  integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 debug@4:
   version "4.3.4"
@@ -1370,6 +1390,11 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash@^4.17.20:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
 loupe@^2.3.1:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/loupe/-/loupe-2.3.4.tgz#7e0b9bffc76f148f9be769cb1321d3dcf3cb25f3"
@@ -2040,6 +2065,17 @@ uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+v-calendar@^3.0.0-alpha.8:
+  version "3.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/v-calendar/-/v-calendar-3.0.0-alpha.8.tgz#3bc8c69f4788fb527c39706f41fd2a502a17c827"
+  integrity sha512-T23H5UbK0EomrwArlF/jrT2LFbV/lu+Bp9JroZ1paN6rPoaMyvE+HrLxvAmUgi+pODrdTURDMzM3+WPgeFKEBQ==
+  dependencies:
+    "@popperjs/core" "2.4.0"
+    "@types/lodash" "^4.14.165"
+    date-fns "^2.16.1"
+    date-fns-tz "^1.0.12"
+    lodash "^4.17.20"
 
 v8-to-istanbul@^8.0.0:
   version "8.1.1"

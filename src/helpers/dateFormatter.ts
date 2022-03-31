@@ -8,3 +8,12 @@ export const getDateMonthYearFromISO = (iso: string) => {
     year: 'numeric'
   })
 }
+export const stringifyDate = (date: Date) => {
+  // input: js date object
+  // output: Aug 20, 2021 (for bad input returns Invalid Date)
+  return date.toLocaleDateString('en-us', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  })
+}

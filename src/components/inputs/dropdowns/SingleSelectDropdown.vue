@@ -26,6 +26,7 @@
         v-show="isDropdownShown && options.length"
         class="absolute mt-1 w-full bg-white text-grey-9 rounded shadow border border-grey-5 overflow-y-auto custom-scrollbar z-30"
         :style="{'max-height': dropdownHeight}"
+        data-testid="single-select-dropdown"
       >
         <div
           @click="$emit('optionClicked', option.id)"

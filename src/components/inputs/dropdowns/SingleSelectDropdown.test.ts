@@ -1,46 +1,101 @@
 import { describe, expect, test, beforeEach, afterEach } from "vitest";
 import { mount, VueWrapper } from '@vue/test-utils'
 
-import HeadlessSingleSelectDropdown from './HeadlessSingleSelectDropdown.vue'
+import SingleSelectDropdown from './SingleSelectDropdown.vue'
 import { fake_dropdownOptions } from "../../../fakeData/dropdown.fake";
 
 let wrapper: VueWrapper
+// helpers
+const findDropdown = () => wrapper.find('[data-testid=single-select-dropdown]')
+const findLabel = () => wrapper.find('label')
+
+describe('label visiblity based on props', () => {
+  afterEach(() => {
+    wrapper.unmount()
+  })
+  test('label should not exist if it is not truthy in props', async () => {
+    wrapper = mount(SingleSelectDropdown, {
+      props: {
+        options: [],
+        isDropdownShown: false
+      }
+    })
+    expect(findLabel().exists()).toBe(false)
+  })
+  test('label should exist if it is defined in props', async () => {
+    wrapper = mount(SingleSelectDropdown, {
+      props: {
+        options: [],
+        isDropdownShown: false,
+        label: 'Test Label'
+      }
+    })
+    expect(findLabel().exists()).toBe(true)
+  })
+})
+
+describe('border color based on errorMessage passed in props', () => {
+  afterEach(() => {
+    wrapper.unmount()
+  })
+  test('border color should not be red if errorMessage is not truthy', async () => {
+    wrapper = mount(SingleSelectDropdown, {
+      props: {
+        options: [],
+        isDropdownShown: false
+      }
+    })
+    expect(wrapper.classes()).not.toContain('border-red')
+  })
+  test('border color should be red if errorMessage is passed', async () => {
+    wrapper = mount(SingleSelectDropdown, {
+      props: {
+        options: [],
+        isDropdownShown: false,
+        errorMessage: 'Test error message'
+      }
+    })
+    expect(wrapper.classes()).toContain('border-red')
+  })
+})
 
 describe('dropdown hidden', () => {
   afterEach(() => {
     wrapper.unmount()
   })
   test('dropdown should be hidden if isDropdownShown is false in props', async () => {
-    wrapper = mount(HeadlessSingleSelectDropdown, {
+    wrapper = mount(SingleSelectDropdown, {
       props: {
         options: [],
         isDropdownShown: false
       }
     })
-    expect(wrapper.isVisible()).toBe(false)
+    expect(findDropdown().isVisible()).toBe(false)
   })
   test('dropdown should be hidden if no option is passed', async () => {
-    wrapper = mount(HeadlessSingleSelectDropdown, {
+    wrapper = mount(SingleSelectDropdown, {
       props: {
         options: [],
         isDropdownShown: true
       }
     })
-    expect(wrapper.isVisible()).toBe(false)
+    expect(findDropdown().isVisible()).toBe(false)
   })
   test('dropdown should be hidden if no option is passed and isDropdownShown is false', async () => {
-    wrapper = mount(HeadlessSingleSelectDropdown, {
+    wrapper = mount(SingleSelectDropdown, {
       props: {
         options: [],
         isDropdownShown: false
       }
     })
-    expect(wrapper.isVisible()).toBe(false)
+    expect(findDropdown().isVisible()).toBe(false)
   })
 })
 describe('dropdown visible', () => {
+  let wrapper: VueWrapper
+
   beforeEach(() => {
-    wrapper = mount(HeadlessSingleSelectDropdown, {
+    wrapper = mount(SingleSelectDropdown, {
       props: {
         options: fake_dropdownOptions,
         isDropdownShown: true
@@ -80,5 +135,3 @@ describe('dropdown visible', () => {
     expect(wrapper.emitted().optionClicked[0]).toEqual([fake_dropdownOptions[0].id])
   })
 })
-
-

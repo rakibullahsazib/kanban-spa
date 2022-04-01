@@ -4,7 +4,7 @@ import TextInput from '../inputs/text-inputs/TextInput.vue';
 import Textarea from '../inputs/text-inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
 import { mount, VueWrapper } from '@vue/test-utils'
-import { useBoardStore } from '../../store/board.store'
+import { useBoardStore } from '../../store/boardStore'
 import { getMaxOrder } from '../../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
 import { nextTick } from "vue";

@@ -62,8 +62,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import draggable from 'vuedraggable'
-import { useRootStore } from '../store/root.store'
-import { useBoardStore } from '../store/board.store';
+import { useRootStore } from '../store/rootStore'
+import { useBoardStore } from '../store/boardStore';
 import { fake_boards, fake_currentBoard } from '../fakeData/board.fake';
 
 import HomeSldebarSlider from '@/components/page-sections/home/HomeSidebarSlider.vue';

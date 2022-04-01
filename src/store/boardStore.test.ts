@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { afterEach, beforeAll, beforeEach, describe, expect, test } from 'vitest'
-import { useBoardStore } from './board.store'
+import { useBoardStore } from './boardStore'
 import { v4 as uuid } from 'uuid'
 import { BoardBrief, StageDetail } from './interface/board.interface'
 import { TaskDetail } from './interface/board.interface'

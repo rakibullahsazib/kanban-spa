@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import {  ref } from 'vue';
-import { useBoardStore } from '../../../store/board.store'
+import { useBoardStore } from '../../../store/boardStore'
 import draggable from 'vuedraggable'
 
 import { StageDetail } from '../../../store/interface/board.interface';

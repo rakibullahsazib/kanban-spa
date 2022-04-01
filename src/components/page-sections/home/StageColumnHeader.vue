@@ -50,7 +50,7 @@
 import { ref } from 'vue'
 import { StageDetail } from '../../../store/interface/board.interface';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';
-import { useBoardStore } from '../../../store/board.store';
+import { useBoardStore } from '../../../store/boardStore';
 import { deleteStageMessage } from '../../../helpers/data/messages'
 
 defineProps<{

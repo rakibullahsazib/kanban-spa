@@ -4,7 +4,7 @@ import HeadlessSingleSelectDropdown from '../../inputs/dropdowns/HeadlessSingleS
 import BoardModal from '../../modals/BoardModal.vue'
 import ConfirmationModal from '../../modals/ConfirmationModal.vue'
 import { mount, VueWrapper } from '@vue/test-utils'
-import { useBoardStore } from '../../../store/board.store'
+import { useBoardStore } from '../../../store/boardStore'
 import { getMaxOrder } from '../../../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
 import { nextTick } from "vue";

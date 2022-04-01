@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { afterEach, beforeAll, beforeEach, describe, expect, test } from 'vitest'
-import { useRootStore } from './root.store'
+import { useRootStore } from './rootStore'
 
 beforeAll(() => {
   setActivePinia(createPinia())

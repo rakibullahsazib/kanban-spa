@@ -43,7 +43,7 @@ import TextInput from '../inputs/text-inputs/TextInput.vue';
 import Textarea from '../inputs/text-inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
 import { BoardBrief, BoardUpdateRequest } from '../../store/interface/board.interface';
-import { useBoardStore } from '../../store/board.store';
+import { useBoardStore } from '../../store/boardStore';
 import { getMaxOrder, isNameDuplicatedCaseInsensitive } from '../../helpers/arrayMethods';
 const props = defineProps<{
   board?: BoardBrief

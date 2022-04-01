@@ -93,7 +93,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useBoardStore } from '../../store/board.store';
+import { useBoardStore } from '../../store/boardStore';
 import TextInput from '../inputs/text-inputs/TextInput.vue';
 import Textarea from '../inputs/text-inputs/Textarea.vue';
 import Button from '../buttons/Button.vue';
@@ -103,7 +103,7 @@ import SingleSelectDropdown from '../inputs/dropdowns/SingleSelectDropdown.vue';
 import { TaskDetail, TaskUpdateRequest } from '../../store/interface/board.interface';
 import { taskBackgroundColors } from '../../helpers/data/colors'
 import { getMaxOrder, isNameDuplicatedCaseInsensitive } from '../../helpers/arrayMethods';
-import { useRootStore } from '../../store/root.store';
+import { useRootStore } from '../../store/rootStore';
 import DatePicker from '../inputs/DatePicker.vue';
 
 const props = defineProps<{

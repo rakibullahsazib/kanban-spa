@@ -52,7 +52,7 @@ import { computed } from '@vue/reactivity';
 import { TaskDetail } from '../../../store/interface/board.interface';
 import { getDateMonthYearFromISO } from '../../../helpers/dateFormatter'
 import { getInitials } from '../../../helpers/stringMethods'
-import { useBoardStore } from '../../../store/board.store';
+import { useBoardStore } from '../../../store/boardStore';
 
 const props = defineProps<{
   task: TaskDetail

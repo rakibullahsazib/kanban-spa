@@ -2,7 +2,7 @@ import { expect, test, describe, beforeEach, afterEach, fn } from "vitest";
 import { mount, VueWrapper } from '@vue/test-utils'
 import Home from './Home.vue'
 import BoardModal from '@/components/modals/BoardModal.vue'
-import { useBoardStore } from '../store/board.store'
+import { useBoardStore } from '../store/boardStore'
 import { getMaxOrder } from '../helpers/arrayMethods'
 import { createTestingPinia } from '@pinia/testing'
 import { nextTick } from "vue";

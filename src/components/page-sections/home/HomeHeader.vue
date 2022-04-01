@@ -84,8 +84,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useBoardStore } from '../../../store/board.store';
-import { useRootStore } from '../../../store/root.store';
+import { useBoardStore } from '../../../store/boardStore';
+import { useRootStore } from '../../../store/rootStore';
 import HeadlessSingleSelectDropdown from '../../inputs/dropdowns/HeadlessSingleSelectDropdown.vue';
 import BoardModal from '@/components/modals/BoardModal.vue';
 import ConfirmationModal from '../../modals/ConfirmationModal.vue';

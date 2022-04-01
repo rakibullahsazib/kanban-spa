@@ -34,7 +34,7 @@
 import { ref, computed, watch } from 'vue'
 import 'v-calendar/dist/style.css';
 import { DatePicker } from 'v-calendar'
-import { stringifyDate } from '../../helpers/dateFormatter'
+import { stringifyDate } from '../../../helpers/dateFormatter'
 
 const props = defineProps<{
   isDropdownShown: boolean

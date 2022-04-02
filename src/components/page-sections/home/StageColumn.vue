@@ -1,5 +1,5 @@
 <template>
-  <div class="px-2 pb-2 flex flex-col">
+  <div class="pl-1 pr-1 pb-2 flex flex-col">
     <!-- Add Task Button -->
     <ButtonWithIcon
       v-if="stage.name === 'Backlog'"
@@ -16,11 +16,12 @@
       group="boardTasks"
       handle=".task-handle"
       @end="onTaskDragEnd"
-      class="mt-4 flex-grow overflow-x-hidden overflow-y-auto"
+      class="mt-4 flex-grow overflow-x-hidden overflow-y-auto custom-scrollbar"
     >
       <template #item="{element}">
         <TaskCard
-          @click="taskToBeEdited = element.id"
+          @edit="taskToBeEdited = element.id"
+          @delete="taskToBeDeleted = element.id"
           :task="element"
           class="mb-2 w-56"
         />

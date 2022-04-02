@@ -1,36 +1,58 @@
 <template>
-  <div class="flex w-full">
+  <div class="flex w-full overflow-hidden">
     <HomeSldebarSlider class="flex-shrink-0" />
     <!-- Right Side Content -->
-    <div v-if="currentBoard" class="h-screen flex-grow flex flex-col px-4 py-2">
+    <div v-if="currentBoard" class="h-screen flex-grow flex flex-col px-4 py-2 overflow-hidden">
       <HomeHeader />
-      <!-- Stage Headers -->
-      <draggable
-        item-key="id"
-        tag="ul"
-        :animation="300"
-        :list="currentBoard.stages"
-        group="boardStages"
-        handle=".stage-handle"
-        @end="onStageDragEnd"
-        class="flex border-b-2 border-dashed border-grey-1"
-      >
-        <template #item="{element}">
+      <!-- Stages -->
+      <div class="flex-grow flex justify-start">
+        <!-- Backlog stage -->
+        <div class="flex-shrink-0 flex flex-col">
           <StageColumnHeader
-            :stage="element"
-            class="flex-shrink-0 w-60  border-r-2 border-dashed border-grey-1"
+            :stage="currentBoard.stages[0]"
+            class="flex-shrink-0 border-r-2 border-b-2 border-dashed border-grey-1"
+            style="width: 15rem;"
           />
-        </template>
-      </draggable>
-      <!-- Stage Columns -->
-      <div class="h-full overflow-y-hidden overflow-x-visible flex-grow flex border-b-2 border-dashed border-grey-1">
-        <StageColumn
-          v-for="stage in currentBoard.stages"
-          :key="stage.id"
-          :stage="stage"
-          class="flex-shrink-0 h-full border-r-2 border-dashed border-grey-1"
-          style="width: 15rem;"
-        />
+          <StageColumn
+            :stage="currentBoard.stages[0]"
+            class="flex-shrink-0 border-b-2 border-r-2 border-dashed border-grey-1"
+            style="width: 15rem; height:calc(100vh - 7rem)"
+          />
+        </div>
+        <!-- Other stages -->
+        <div class="flex-grow overflow-x-auto overflow-y-hidden custom-scrollbar">
+          <!-- Stage Headers -->
+          <draggable
+            item-key="id"
+            tag="ul"
+            :animation="300"
+            :list="currentBoard.stages"
+            group="boardStages"
+            handle=".stage-handle"
+            @end="onStageDragEnd"
+            class="flex"
+          >
+            <template #item="{element}">
+              <StageColumnHeader
+                v-if="element.name !== 'Backlog'"
+                :stage="element"
+                class="flex-shrink-0 border-b-2 border-r-2 border-dashed border-grey-1"
+                style="width: 15rem;"
+              />
+            </template>
+          </draggable>
+          <!-- Stage Columns -->
+          <div class="flex-grow flex border-b-2 border-dashed border-grey-1">
+            <template v-for="stage in currentBoard.stages" :key="stage.id">
+            <StageColumn
+              v-if="stage.name !== 'Backlog'"
+              :stage="stage"
+              class="flex-shrink-0 border-b-2 border-r-2 border-dashed border-grey-1"
+              style="width: 15rem; height:calc(100vh - 7rem)"
+            />
+            </template>
+          </div>
+        </div>
       </div>
     </div>
     <!-- No current board -->

@@ -119,6 +119,18 @@ export const fake_currentBoard: BoardDetail = {
       order: 3,              
       tasks: []
     },
+    {
+      id: '4',
+      name: 'Stage 4',
+      order: 4,              
+      tasks: []
+    },
+    {
+      id: '5',
+      name: 'Stage 5',
+      order: 5,              
+      tasks: []
+    },
   ]
 }
 

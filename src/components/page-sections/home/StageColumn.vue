@@ -6,7 +6,7 @@
       @click="isTaskModalShown = true"
       title="Add Task"
       icon="plus-circle-black.svg"
-      class="sticky top-2 w-56 mx-auto"
+      class="sticky mt-2 w-56 mx-auto"
     />
     <draggable
       item-key="id"
@@ -23,8 +23,7 @@
           @edit="taskToBeEdited = element.id"
           @delete="taskToBeDeleted = element.id"
           :task="element"
-          class="mb-2 mx-auto last:mb-0 w-56"
-          :class="stage.name === 'Backlog' ? 'first:mt-4' : 'first:mt-2'"
+          class="mb-2 mx-auto last:mb-0 w-56 first:mt-2"
         />
       </template>
     </draggable>

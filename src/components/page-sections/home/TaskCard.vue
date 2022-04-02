@@ -1,19 +1,15 @@
 <template>
   <div
-    ref="taskCardEl"
     @click="$emit('edit')"
-    @mouseenter="handleMouseEnter"
     class="task-handle parent-hover relative rounded cursor-pointer"
     :style="{backgroundColor: task.color}"
   >
     <!-- Delete icon -->
     <img
-      v-show="crossPositionX !== undefined && crossPositionY !== undefined"
       @click.stop="$emit('delete')"
       src="/assets/icons/cross-circle-dark.svg"
-      alt=""
-      class="child-visible fixed w-4 h-4 z-30"
-      :style="{top: `${crossPositionY}px`, left: `${crossPositionX}px`}"
+      class="child-visible absolute -top-1 -left-1 w-4 h-4 z-30"
+      title="Delete Task"
     >
     <!-- Status -->
     <img
@@ -71,16 +67,6 @@ const taskStatus = computed(() => {
   return boardStore.taskStatuses.find(s => s.id === props.task.statusId)
 })
 
-const taskCardEl = ref<HTMLDivElement>()
-const crossPositionX = ref<number|undefined>(undefined)
-const crossPositionY = ref<number|undefined>(undefined)
-const handleMouseEnter = () => {
-  console.log(taskCardEl.value?.getBoundingClientRect())
-  const pos = taskCardEl.value?.getBoundingClientRect()
-  if (!pos) return
-  crossPositionX.value = pos?.x - 6
-  crossPositionY.value = pos?.y - 6
-}
 </script>
 
 <style scoped>

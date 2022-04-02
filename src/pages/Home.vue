@@ -23,12 +23,13 @@
         </template>
       </draggable>
       <!-- Stage Columns -->
-      <div class="h-full overflow-hidden custom-scrollbar flex-grow flex border-b-2 border-dashed border-grey-1">
+      <div class="h-full overflow-y-hidden overflow-x-visible flex-grow flex border-b-2 border-dashed border-grey-1">
         <StageColumn
           v-for="stage in currentBoard.stages"
           :key="stage.id"
           :stage="stage"
-          class="flex-shrink-0 h-full w-60 border-r-2 border-dashed border-grey-1"
+          class="flex-shrink-0 h-full border-r-2 border-dashed border-grey-1"
+          style="width: 15rem;"
         />
       </div>
     </div>

@@ -1,12 +1,12 @@
 <template>
-  <div class="pl-1 pr-1 pb-2 flex flex-col">
+  <div class="pb-2 flex flex-col">
     <!-- Add Task Button -->
     <ButtonWithIcon
       v-if="stage.name === 'Backlog'"
       @click="isTaskModalShown = true"
       title="Add Task"
       icon="plus-circle-black.svg"
-      class="sticky top-2"
+      class="sticky top-2 w-56 mx-auto"
     />
     <draggable
       item-key="id"
@@ -16,14 +16,15 @@
       group="boardTasks"
       handle=".task-handle"
       @end="onTaskDragEnd"
-      class="mt-4 flex-grow overflow-x-hidden overflow-y-auto custom-scrollbar"
+      class="flex-grow overflow-x-hidden overflow-y-auto custom-scrollbar"
     >
       <template #item="{element}">
         <TaskCard
           @edit="taskToBeEdited = element.id"
           @delete="taskToBeDeleted = element.id"
           :task="element"
-          class="mb-2 w-56"
+          class="mb-2 mx-auto last:mb-0 w-56"
+          :class="stage.name === 'Backlog' ? 'first:mt-4' : 'first:mt-2'"
         />
       </template>
     </draggable>

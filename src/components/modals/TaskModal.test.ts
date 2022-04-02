@@ -725,6 +725,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     wrapper.unmount()
     boardStore.$reset()
   })
+  // Task Name
   test('when task Name is empty, button should be disabled', async () => {
     await findTaskNameInput().vm.$emit('inputChange', '')
     expect(findBtn().props('disabled')).toBe(true)
@@ -740,6 +741,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await nextTick()
     expect(findBtn().props('disabled')).toBe(true)
   })
+  // Task Description
   test('when description changes, btn should be active', async () => {
     await findTextareaInput().vm.$emit('inputChange', 'Changed Description')
     expect(findBtn().props('disabled')).toBe(false)
@@ -749,6 +751,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await findTextareaInput().vm.$emit('inputChange', fake_currentBoard.stages[0].tasks[0].description)
     expect(findBtn().props('disabled')).toBe(false)
   })
+  // Task Assignee
   test('when assignee changes, btn should be active', async () => {
     await findTaskAssigneeInput().vm.$emit('inputChange', 'Changed Assignee')
     expect(findBtn().props('disabled')).toBe(false)
@@ -758,6 +761,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await findTaskAssigneeInput().vm.$emit('inputChange', fake_currentBoard.stages[0].tasks[0].assignee)
     expect(findBtn().props('disabled')).toBe(false)
   })
+  // Task Due Date
   test('when taskDueDate is empty, button should be disabled', async () => {
     await findDatePicker().vm.$emit('toggle', '')
     expect(findBtn().props('disabled')).toBe(true)
@@ -771,6 +775,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await findDatePicker().vm.$emit('toggle', fake_currentBoard.stages[0].tasks[0].dueDate)
     expect(findBtn().props('disabled')).toBe(true)
   })
+  // Task Stage Id
   test('when taskStageId is empty, button should be disabled', async () => {
     await findStageDropdown().vm.$emit('optionClicked', '')
     expect(findBtn().props('disabled')).toBe(true)
@@ -784,6 +789,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await findStageDropdown().vm.$emit('optionClicked', fake_currentBoard.stages[0].tasks[0].stageId)
     expect(findBtn().props('disabled')).toBe(true)
   })
+  // Task Status Id
   test('when taskStatusId is empty, button should be disabled', async () => {
     await findStatusDropdown().vm.$emit('optionClicked', '')
     expect(findBtn().props('disabled')).toBe(true)
@@ -797,6 +803,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
     await findStatusDropdown().vm.$emit('optionClicked', fake_currentBoard.stages[0].tasks[0].statusId)
     expect(findBtn().props('disabled')).toBe(true)
   })
+  // Save changes
   test('on btn click save changes to the task', async () => {
     const date = new Date().toISOString()
     findTaskNameInput().vm.$emit('inputChange', 'Task Name')

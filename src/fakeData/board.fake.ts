@@ -53,84 +53,57 @@ export const fake_currentBoard: BoardDetail = {
         {
           id: '1',
           name: 'Backlog Task 1',
-          description: 'Backlog Task 1 description',
+          description: 'Backlog Task 1 Description',
           color: '#99F997',
           order: 1,
           stageId: '1',
-          assignee: 'Rakib Sazib',
+          assignee: 'Assignee 1',
           statusId: '3',
-          dueDate: new Date().toISOString(),
-          checklist: [
-            {
-              id: '1',
-              name: 'Checklist 1',
-              completed: true
-            },
-            {
-              id: '2',
-              name: 'Checklist 2',
-              completed: true
-            }
-          ]
+          dueDate: new Date().toISOString()
         },
         {
           id: '2',
           name: 'Backlog Task 2',
-          description: 'Backlog Task 2 description',
+          description: 'Backlog Task 2 Description',
           color: '#99F997',
           order: 2,
           stageId: '1',
           assignee: 'Rakib',
           statusId: '1',
-          dueDate: new Date().toISOString(),
-          checklist: [
-            {
-              id: '3',
-              name: 'Checklist 3',
-              completed: true
-            },
-            {
-              id: '4',
-              name: 'Checklist 4',
-              completed: false
-            }
-          ]
+          dueDate: new Date().toISOString()
         },
         {
           id: '3',
           name: 'Backlog Task 3',
-          description: 'Backlog Task 1 description',
+          description: 'Backlog Task 3 Description',
           color: '#99F997',
           order: 3,
           stageId: '1',
           assignee: 'Rakib Sazib',
           statusId: '2',
-          dueDate: new Date().toISOString(),
-          checklist: []
+          dueDate: new Date().toISOString()
         },
         {
           id: '4',
           name: 'Backlog Task 4',
-          description: 'Backlog Task 1 description',
+          description: 'Backlog Task 4 Description',
           color: '#99F997',
           order: 3,
           stageId: '1',
           assignee: 'Rakib Sazib',
           statusId: '2',
-          dueDate: new Date().toISOString(),
-          checklist: []
+          dueDate: new Date().toISOString()
         },
         {
           id: '5',
           name: 'Backlog Task 5',
-          description: 'Backlog Task 1 description',
+          description: 'Backlog Task 5 Description',
           color: '#99F997',
           order: 5,
           stageId: '1',
           assignee: 'Rakib Sazib',
           statusId: '2',
-          dueDate: new Date().toISOString(),
-          checklist: []
+          dueDate: new Date().toISOString()
         },
       ]
     },

@@ -3,6 +3,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 
 import SingleSelectDropdown from './SingleSelectDropdown.vue'
 import { fake_dropdownOptions } from "../../../fakeData/dropdown.fake";
+import { nextTick } from "vue";
 
 let wrapper: VueWrapper
 // helpers
@@ -129,9 +130,11 @@ describe('dropdown visible', () => {
       }
     }
   })
-  test('emit event on option click', async () => {
+  test('emit optionClicked event and toggle event on option click', async () => {
     await findOptionById(fake_dropdownOptions[0].id).trigger('click')
     expect(wrapper.emitted().optionClicked).toBeTruthy()
     expect(wrapper.emitted().optionClicked[0]).toEqual([fake_dropdownOptions[0].id])
+    await nextTick()
+    expect(wrapper.emitted().toggle).toBeTruthy()
   })
 })

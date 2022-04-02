@@ -29,7 +29,7 @@
         data-testid="single-select-dropdown"
       >
         <div
-          @click="$emit('optionClicked', option.id)"
+          @click.stop="onOptionClick(option.id)"
           v-for="option in options"
           :key="option.id"
           :data-testid="`option_${option.id}`"
@@ -64,8 +64,15 @@ const props = defineProps<{
   label?: string,
   errorMessage?: string
 }>()
+const emit = defineEmits(['toggle', 'optionClicked'])
 
 const selectedOption = computed(() => props.options.find(i => i.id === props.selectedOptionId))
+
+const onOptionClick = (optionId: string) => {
+  emit('toggle')
+  emit('optionClicked', optionId)
+}
+
 </script>
 
 <style scoped>

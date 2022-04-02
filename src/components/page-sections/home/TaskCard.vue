@@ -28,16 +28,9 @@
         <p class="text-xs opacity-50 font-semibold">
           Due: {{ getDateMonthYearFromISO(task.dueDate) }}
         </p>
-        <!-- Checklist items -->
-        <div
-          title="checklist"
-          class="mt-1 flex items-center space-x-1"
-        >
-          <img class="w-4 h-4" src="/assets/icons/checklist.svg">
-          <p class="text-xs opacity-50">
-            {{ noOfCompletedChecklistItems }}/{{ task.checklist.length }}
-          </p>
-        </div>
+        <p class="mt-1 text-xs opacity-50">
+          {{ task.assignee }}
+        </p>
       </div>
     </div>
     <!-- Title -->
@@ -59,13 +52,6 @@ const props = defineProps<{
 }>()
 
 const boardStore = useBoardStore()
-const noOfCompletedChecklistItems = computed(() => {
-  let completed = 0
-  for (const c of props.task.checklist) {
-    if (c.completed) completed++
-  }
-  return completed
-})
 const taskStatus = computed(() => {
   return boardStore.taskStatuses.find(s => s.id === props.task.statusId)
 })

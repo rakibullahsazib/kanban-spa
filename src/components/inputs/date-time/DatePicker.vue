@@ -7,7 +7,11 @@
     >
       {{ label }}
     </label>
-    <div @click.stop="$emit('toggle')" class="px-4 pt-1.5 pb-1 flex items-center justify-between space-x-2 text-sm text-grey-6 cursor-pointer border border-grey-5 rounded">
+    <div
+      @click.stop="$emit('toggle')"
+      class="px-4 pt-1.5 pb-1 flex items-center justify-between space-x-2 text-sm text-grey-6 cursor-pointer border border-grey-5 rounded"
+      data-testid="selected-date"
+    >
       <p class="font-semibold text-grey-9">
         {{ stringifiedDate }}
       </p>
@@ -17,11 +21,12 @@
     <transition name="toggle">
       <div
         @click.stop
-        v-if="isDropdownShown"
+        v-show="isDropdownShown"
         class="absolute top-full right-0 mt-1 transform scale-75 origin-top-right custom-scrollbar bg-white shadow-c rounded z-10"
+        data-testid="date-picker-dropdown"
       >
-        <DatePicker
-          class="font-mulish text-sm"
+        <VDatePicker
+          class="text-sm"
           v-model="calendarDate"
           is-expanded
         />
@@ -33,7 +38,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import 'v-calendar/dist/style.css';
-import { DatePicker } from 'v-calendar'
+import { DatePicker as VDatePicker } from 'v-calendar'
 import { stringifyDate } from '../../../helpers/dateFormatter'
 
 const props = defineProps<{

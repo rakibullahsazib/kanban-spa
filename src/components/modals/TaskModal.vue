@@ -81,10 +81,10 @@
               </div>
             </div>
             <Button
-                @click="task ? editTask() : addTask()"
-                :title="`${ task ? 'Save Changes' : 'Add Task' }`"
-                :disabled="!isBtnActive"
-                class="mt-8 mx-auto"
+              @click="task ? editTask() : addTask()"
+              :title="`${ task ? 'Save Changes' : 'Add Task' }`"
+              :disabled="!isBtnActive"
+              class="mt-8 mx-auto"
             />
         </div>
     </div>
@@ -100,11 +100,11 @@ import Button from '../buttons/Button.vue';
 import SelectedColorPicker from '../inputs/color-picker/SelectedColorPicker.vue';
 import SingleSelectDropdown from '../inputs/dropdowns/SingleSelectDropdown.vue';
 
-import { TaskDetail, TaskUpdateRequest } from '../../store/interface/board.interface';
+import { StageDetail, TaskDetail, TaskUpdateRequest } from '../../store/interface/board.interface';
 import { taskBackgroundColors } from '../../helpers/data/colors'
 import { getMaxOrder, isNameDuplicatedCaseInsensitive } from '../../helpers/arrayMethods';
 import { useRootStore } from '../../store/rootStore';
-import DatePicker from '../inputs/DatePicker.vue';
+import DatePicker from '../inputs/date-time/DatePicker.vue';
 
 const props = defineProps<{
   task?: TaskDetail
@@ -125,11 +125,16 @@ const changeTaskName = (value: string) => {
     }
     // in case of edit if the value is same no need to proceed further
     if (props.task && props.task.name === value)  return
-
-    if (isNameDuplicatedCaseInsensitive(value, boardStore.boards)) {
-        console.log('name duplicated')
-        taskNameError.value = "This task name already exists in this board."
+    if (boardStore.currentBoard) {
+      for (const stage of boardStore.currentBoard.stages) {
+        if (isNameDuplicatedCaseInsensitive(value, stage.tasks)) {
+            console.log('name duplicated')
+            taskNameError.value = "This task name already exists in this board."
+            break
+        }
+      }
     }
+    
 }
 // Task Color
 const taskColor = ref(props.task?.color || taskBackgroundColors[0])

@@ -50,17 +50,17 @@ export interface TaskUpdateRequest{
 }
 export interface TaskDetail extends TaskRequest{
   id: string;
-  checklist: TaskChecklistItem[];
+  // checklist: TaskChecklistItem[];
 }
 
-export interface TaskChecklistItemRequest {
-  name: string;
-  taskId: string;
-}
-export interface TaskChecklistItem extends TaskChecklistItemRequest {
-  id: string;
-  completed: boolean;
-}
+// export interface TaskChecklistItemRequest {
+//   name: string;
+//   taskId: string;
+// }
+// export interface TaskChecklistItem extends TaskChecklistItemRequest {
+//   id: string;
+//   completed: boolean;
+// }
 
 export interface TaskStatus{
   id: string;

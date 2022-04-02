@@ -15,7 +15,7 @@ describe('debounce', () => {
   test('function is executed after specified time', async () => {
     let test = 5
     const increase = debounce(() => {
-      console.log('increase test to', test + 1)
+      // console.log('increase test to', test + 1)
       test++
     }, 500)
     vi.useFakeTimers()

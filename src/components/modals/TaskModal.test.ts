@@ -355,6 +355,7 @@ describe('Case: Add Task, Btn Component Events', () => {
     expect(findBtn().props('disabled')).toBe(true)
   })
   test('on btn click add task to current board', async () => {
+    const noOfTasksBefore = boardStore.currentBoard?.stages[0].tasks.length
     const date = new Date().toISOString()
     findTaskNameInput().vm.$emit('inputChange', 'Task Name')
     findTaskAssigneeInput().vm.$emit('inputChange', 'Task Assignee')
@@ -370,6 +371,7 @@ describe('Case: Add Task, Btn Component Events', () => {
     await nextTick()
     const newTask = boardStore.currentBoard?.stages[0].tasks.find(t => t.name === 'Task Name')
     expect(newTask).toBeDefined()
+    expect(boardStore.currentBoard?.stages[0].tasks.length).toBe(noOfTasksBefore ? noOfTasksBefore + 1 : undefined)
     expect(newTask?.description).toBe('Task Description')
     expect(newTask?.assignee).toBe('Task Assignee')
     expect(newTask?.dueDate).toBe(date)
@@ -703,7 +705,7 @@ describe('Case: Edit Task, Status SingleSelectDropdown component events', () => 
   })
 })
 
-describe.skip('Case: Edit Task, Btn component events', () => {
+describe('Case: Edit Task, Btn component events', () => {
   const createWrapper = () => {
     wrapper = mount(TaskModal, {
       props: {
@@ -749,7 +751,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
   test('when description remains same, btn should be disabled', async () => {
     await findTextareaInput().vm.$emit('inputChange', 'Changed Description')
     await findTextareaInput().vm.$emit('inputChange', fake_currentBoard.stages[0].tasks[0].description)
-    expect(findBtn().props('disabled')).toBe(false)
+    expect(findBtn().props('disabled')).toBe(true)
   })
   // Task Assignee
   test('when assignee changes, btn should be active', async () => {
@@ -759,7 +761,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
   test('when assignee remains same, btn should be disabled', async () => {
     await findTaskAssigneeInput().vm.$emit('inputChange', 'Changed Assignee')
     await findTaskAssigneeInput().vm.$emit('inputChange', fake_currentBoard.stages[0].tasks[0].assignee)
-    expect(findBtn().props('disabled')).toBe(false)
+    expect(findBtn().props('disabled')).toBe(true)
   })
   // Task Due Date
   test('when taskDueDate is empty, button should be disabled', async () => {
@@ -805,6 +807,7 @@ describe.skip('Case: Edit Task, Btn component events', () => {
   })
   // Save changes
   test('on btn click save changes to the task', async () => {
+    const taskId = fake_currentBoard.stages[0].tasks[0].id
     const date = new Date().toISOString()
     findTaskNameInput().vm.$emit('inputChange', 'Task Name')
     findTaskAssigneeInput().vm.$emit('inputChange', 'Task Assignee')
@@ -819,9 +822,9 @@ describe.skip('Case: Edit Task, Btn component events', () => {
 
     await nextTick()
 
-    expect(boardStore.currentBoard?.stages[0].tasks.find(t => t.name === fake_currentBoard.stages[0].tasks[0].name)).toBeUndefined()
-    const editedTask = boardStore.currentBoard?.stages[0].tasks.find(t => t.name === 'Task Name')
+    const editedTask = boardStore.currentBoard?.stages[0].tasks.find(t => t.id === taskId)
     expect(editedTask).toBeDefined()
+    expect(editedTask?.name).toBe('Task Name')
     expect(editedTask?.description).toBe('Task Description')
     expect(editedTask?.assignee).toBe('Task Assignee')
     expect(editedTask?.dueDate).toBe(date)

@@ -68,7 +68,7 @@ export const fake_currentBoard: BoardDetail = {
           color: '#99F997',
           order: 2,
           stageId: '1',
-          assignee: 'Rakib',
+          assignee: '',
           statusId: '1',
           dueDate: new Date().toISOString()
         },

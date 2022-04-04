@@ -1,7 +1,12 @@
 <template>
   <div class="flex">
-    <SidebarMenu class="flex-shrink-0" />
-    <router-view></router-view>
+    <SidebarMenu />
+    <router-view v-slot="{ Component, route }">
+      <transition name="route-fade" mode="out-in">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 

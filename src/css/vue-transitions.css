@@ -8,6 +8,18 @@
   opacity: 0;
 }
 
+.route-fade-leave-active {
+  transition: all 200ms ease;
+}
+.route-fade-enter-active {
+  transition: all 300ms ease;
+  transition-delay: 100ms;
+}
+.route-fade-enter-from,
+.route-fade-leave-to {
+  opacity: 0;
+}
+
 /* Toggle for dropdowns */
 .toggle-enter-active,
 .toggle-leave-active {

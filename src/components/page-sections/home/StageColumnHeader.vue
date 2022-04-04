@@ -1,6 +1,6 @@
 <template>
   <div class="relative parent-hover py-3 px-10 flex-center space-x-3">
-    <h3 class="truncate flex-grow flex-center font-semibold text-grey-7">
+    <h3 class="truncate flex-grow flex-center font-semibold text-grey-7" data-testid="stage-name">
       {{ stage.name }}
     </h3>
     <!-- Move btn -->

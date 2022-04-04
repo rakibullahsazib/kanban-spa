@@ -36,6 +36,9 @@ describe('Backlog stage', () => {
   afterEach(() => {
     wrapper.unmount()
   })
+  test('the stage name in props should be backlog', async() => {
+    expect(wrapper.props('stage').name).toBe('Backlog')
+  })
   test('stage name should exist and stage name should be Backlog', async () => {
     expect(findStageName().exists()).toBe(true)
     expect(findStageName().text()).toBe('Backlog')
@@ -79,6 +82,9 @@ describe('Any other stage than Backlog', () => {
   })
   afterEach(() => {
     wrapper.unmount()
+  })
+  test('the stage name in props should not be backlog', async() => {
+    expect(wrapper.props('stage').name).not.toBe('Backlog')
   })
   test('stage name should exist and stage name should be rendered properly', async () => {
     expect(findStageName().exists()).toBe(true)

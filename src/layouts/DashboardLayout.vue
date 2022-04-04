@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <SidebarMenu />
+    <SidebarMenu class="flex-shrink-0" />
     <router-view></router-view>
   </div>
 </template>

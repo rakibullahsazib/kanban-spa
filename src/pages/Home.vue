@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full overflow-hidden">
-    <HomeSldebarSlider class="flex-shrink-0" />
+    <HomeSidebarSlider class="flex-shrink-0" />
     <!-- Right Side Content -->
     <div v-if="currentBoard" class="h-screen flex-grow flex flex-col px-4 py-2 overflow-hidden">
       <HomeHeader />
@@ -89,9 +89,9 @@ import { useRootStore } from '../store/rootStore'
 import { useBoardStore } from '../store/boardStore';
 import { fake_boards, fake_currentBoard } from '../fakeData/board.fake';
 
-import HomeSldebarSlider from '@/components/page-sections/home/HomeSidebarSlider.vue';
-import HomeHeader from '@/components/page-sections/home/HomeHeader.vue';
-import BoardModal from '@/components/modals/BoardModal.vue';
+import HomeSidebarSlider from '../components/page-sections/home/HomeSidebarSlider.vue';
+import HomeHeader from '../components/page-sections/home/HomeHeader.vue';
+import BoardModal from '../components/modals/BoardModal.vue';
 import StageColumn from '../components/page-sections/home/StageColumn.vue';
 import StageColumnHeader from '../components/page-sections/home/StageColumnHeader.vue';
 

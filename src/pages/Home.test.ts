@@ -83,6 +83,8 @@ describe('components exists with correct props', () => {
   })
   test('All StageColumnHeaders should exist with resepective stages passed as props', () => {
     const noOfStages = boardStore.currentBoard?.stages.length || 0
+    expect(findStageColumnHeaders().length).toBe(noOfStages)
+    
     for(var i = 0; i < noOfStages; i++) {
       expect(findStageColumnHeaders()[i].exists()).toBe(true)
       expect(findStageColumnHeaders()[i].props('stage')).toBeDefined()
@@ -91,6 +93,8 @@ describe('components exists with correct props', () => {
   })
   test('All StageColumns should exist with resepective stages passed as props', () => {
     const noOfStages = boardStore.currentBoard?.stages.length || 0
+    expect(findStageColumns().length).toBe(noOfStages)
+
     for(var i = 0; i < noOfStages; i++) {
       expect(findStageColumns()[i].exists()).toBe(true)
       expect(findStageColumns()[i].props('stage')).toBeDefined()

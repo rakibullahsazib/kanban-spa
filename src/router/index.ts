@@ -12,32 +12,32 @@ const routes = [
         component: () => import('../pages/Home.vue')
       },
       {
-        path: '/',
+        path: '/workspaces',
         name: 'Workspaces',
         component: () => import('../pages/Workspaces.vue')
       },
       {
-        path: '/',
+        path: '/members',
         name: 'Members',
         component: () => import('../pages/Members.vue')
       },
       {
-        path: '/',
+        path: '/time-logs',
         name: 'Timelogs',
         component: () => import('../pages/Timelogs.vue')
       },
       {
-        path: '/',
+        path: '/settings',
         name: 'Settings',
         component: () => import('../pages/Settings.vue')
       },
       {
-        path: '/',
+        path: '/notifications',
         name: 'Notifications',
         component: () => import('../pages/Notifications.vue')
       },
       {
-        path: '/',
+        path: '/messages',
         name: 'Messages',
         component: () => import('../pages/Messages.vue')
       },
@@ -60,5 +60,5 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
+export { routes }
 export default router

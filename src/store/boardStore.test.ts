@@ -236,7 +236,6 @@ describe('Board Task CRUD operations', () => {
     expect(tasks[tasks.length - 1].assignee).toBe('John Doe')
     expect(tasks[tasks.length - 1].statusId).toBe(statusId)
     expect(tasks[tasks.length - 1].dueDate).toBe('2022-03-05T14:48:00.000Z')
-    expect(tasks[tasks.length - 1].checklist).toStrictEqual([])
   })
   test('update task name', () => {
     const statusId = uuid()

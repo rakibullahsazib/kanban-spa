@@ -1,7 +1,7 @@
 <template>
   <div class="relative border rounded px-4 py-2 transition-300" :class="errorMessage ? 'border-red' : 'border-grey-5'">    
     <input
-      type="text"
+      :type="type || 'text'"
       :id="id"
       class="text-input relative block w-full bg-white bg-opacity-0 text-sm text-grey-9 transition-colors duration-300 focus:outline-none z-10"
       :class="errorMessage ? 'text-red' : 'text-grey-9'"
@@ -17,7 +17,7 @@
       {{ label }}
     </label>
     <transition name="fade">
-      <p v-if="errorMessage" class="absolute max-w-full top-full mt-1 text-xs font-semibold text-red">
+      <p v-if="errorMessage" class="absolute max-w-full top-full mt-0.5 text-xs font-semibold text-red truncate pr-6" :title="errorMessage">
         {{ errorMessage }}
       </p>
     </transition>
@@ -29,6 +29,7 @@ import { ref } from 'vue'
 import { checkStringLimit } from '../../../helpers/stringMethods';
 const props = defineProps<{
   id?: string,
+  type?: string,
   label?: string,
   errorMessage?: string,
   initialValue?: string

@@ -3,6 +3,27 @@ import NotFound from '../pages/NotFound.vue'
 
 const routes = [
   {
+    path: '/account',
+    component: () => import('../layouts/AccountLayout.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('../pages/account/Login.vue')
+      },
+      {
+        path: 'create',
+        name: 'Create Account',
+        component: () => import('../pages/account/CreateAccount.vue')
+      },
+      {
+        path: 'forgot-password',
+        name: 'Forgot Password',
+        component: () => import('../pages/account/ForgotPassword.vue')
+      },
+    ]
+  },
+  {
     path: '/',
     component: () => import('../layouts/DashboardLayout.vue'),
     children: [

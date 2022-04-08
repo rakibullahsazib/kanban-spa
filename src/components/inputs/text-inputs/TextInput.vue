@@ -17,7 +17,7 @@
       {{ label }}
     </label>
     <transition name="fade">
-      <p v-if="errorMessage" class="absolute max-w-full top-full mt-0.5 text-xs font-semibold text-red truncate pr-6" :title="errorMessage">
+      <p v-if="errorMessage" class="absolute w-full top-full mt-0.5 text-xs text-center font-semibold text-red truncate pr-6" :title="errorMessage">
         {{ errorMessage }}
       </p>
     </transition>

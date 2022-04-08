@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { useBoardStore } from './boardStore'
+import { useUserStore } from './userStore'
 export const useRootStore = defineStore('root', {
   state: () => {
     return {
@@ -13,6 +15,11 @@ export const useRootStore = defineStore('root', {
       } else {
         this.currentDropdown = dropdown
       }
+    },
+    resetStores() {
+      console.log('reset')
+      useUserStore().$reset
+      useBoardStore().$reset
     }
   }
 })

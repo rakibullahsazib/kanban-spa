@@ -124,7 +124,6 @@ export const useBoardStore = defineStore('board', {
       if (!this.currentBoard || stageIndex === undefined) return
       this.currentBoard.stages[stageIndex].tasks.push({
         id: uuid(),
-        checklist: [],
         ...task,
       })
     },

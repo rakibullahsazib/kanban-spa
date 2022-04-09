@@ -9,7 +9,9 @@
     </div>
     <div class="w-1/2 h-screen overflow-y-auto flex items-center" style="min-width: 40rem;">
       <router-view v-slot="{ Component, route }">
+        <transition name="route-fade" mode="out-in">
           <component :is="Component" :key="route.path" class="mx-auto" />
+        </transition>
       </router-view>
     </div>
   </div>

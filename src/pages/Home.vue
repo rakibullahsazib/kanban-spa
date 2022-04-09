@@ -87,17 +87,18 @@ import { ref, computed, onMounted } from 'vue';
 import draggable from 'vuedraggable'
 import { useRootStore } from '../store/rootStore'
 import { useBoardStore } from '../store/boardStore';
-import { fake_boards, fake_currentBoard } from '../fakeData/board.fake';
 
 import HomeSidebarSlider from '../components/page-sections/home/HomeSidebarSlider.vue';
 import HomeHeader from '../components/page-sections/home/HomeHeader.vue';
 import BoardModal from '../components/modals/BoardModal.vue';
 import StageColumn from '../components/page-sections/home/StageColumn.vue';
 import StageColumnHeader from '../components/page-sections/home/StageColumnHeader.vue';
+import { useUserStore } from '../store/userStore';
 
 
 const rootStore = useRootStore()
 const boardStore = useBoardStore()
+const userStore = useUserStore()
 const currentBoard = computed(() => boardStore.currentBoard)
 
 const isBoardModalShown = ref(false)

@@ -4,7 +4,8 @@ import { useUserStore } from './userStore'
 export const useRootStore = defineStore('root', {
   state: () => {
     return {
-      currentDropdown: ''
+      currentDropdown: '',
+      previousRouteName: '',
     }
   },
   actions: {
@@ -20,6 +21,7 @@ export const useRootStore = defineStore('root', {
       console.log('reset')
       useUserStore().$reset
       useBoardStore().$reset
+      this.$reset
     }
   }
 })

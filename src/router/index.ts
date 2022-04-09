@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import NotFound from '../pages/NotFound.vue'
+import { useRootStore } from '../store/rootStore'
+import { useUserStore } from '../store/userStore'
+
 
 const routes = [
   {
@@ -26,6 +29,7 @@ const routes = [
   {
     path: '/',
     component: () => import('../layouts/DashboardLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       {
         path: '/',
@@ -65,11 +69,6 @@ const routes = [
 
     ]
   },
-  // {
-  //   path: '/',
-  //   name: 'Board View',
-  //   component: () => import('../pages/BoardView.vue')
-  // },
   {
     path: '/:catchAll(.*)',
     component: NotFound,
@@ -81,5 +80,12 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+router.beforeEach((to, from) => {
+  const rootStore = useRootStore()
+  rootStore.previousRouteName = from.name?.toString() || ''
+  // route navigation based on authentication is being managed by firebase auth state change
+})
+
 export { routes }
 export default router

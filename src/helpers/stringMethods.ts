@@ -1,3 +1,5 @@
+import { stringifyQuery } from "vue-router"
+
 export const checkStringLimit = (str: string, limit: number): string => {
   let output = str.trimStart() 
   if (output.length > limit) {
@@ -7,6 +9,7 @@ export const checkStringLimit = (str: string, limit: number): string => {
 }
 
 export const getInitials = (name: string) => {
+  if (!name.length) return ''
   // input: 'John Doe' output: 'JD'
   // input: 'John' output: 'J'
   // input: 'John Doe Walker' output: 'JD'

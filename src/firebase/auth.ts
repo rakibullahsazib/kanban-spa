@@ -15,7 +15,7 @@ export const listenFirebaseAuthState = () => onAuthStateChanged(auth, (user) => 
     if (user.email) {
       userStore.email = user.email;
     }
-    userStore.loggedIn = true
+    userStore.isLoggedIn = true
     console.log('loggedIn', userStore.email, userStore.uid)
   } else {
     rootStore.resetStores()

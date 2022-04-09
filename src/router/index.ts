@@ -83,8 +83,12 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   const rootStore = useRootStore()
-  rootStore.previousRouteName = from.name?.toString() || ''
+  rootStore.previousRoutePath = from.path?.toString() || ''
   // route navigation based on authentication is being managed by firebase auth state change
+  // Set document title
+  let title = import.meta.env.VITE_APP_TITLE?.toString()
+  title += ' | ' + to.name?.toString()
+  document.title = title || 'Kanban'
 })
 
 export { routes }

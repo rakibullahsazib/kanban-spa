@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithRedirect, signInWithPopup, UserCredential } from "firebase/auth"
 import { UserInfo } from './interface/user.interface'
 import { db } from '../firebase/config'
 import { collection, query, where, doc, addDoc, getDocs } from 'firebase/firestore'
@@ -17,7 +17,8 @@ export const useUserStore = defineStore('user', {
       uid: '',
       userInfo: {
         name: '',
-        user_uid: ''
+        user_uid: '',
+        photo: ''
       },
       email: '',
       isLoggedIn: false
@@ -35,10 +36,26 @@ export const useUserStore = defineStore('user', {
         user_uid: response.user.uid
       });
     },
-    async logInUser (email: string, password: string) {
+    async signInUser (email: string, password: string) {
       const auth = getAuth();
       const response = await signInWithEmailAndPassword(auth, email, password)
       console.log(response.user)
+    },
+    async signInWithGoogle () {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth();
+      const response: any = await signInWithPopup(auth, provider)
+
+      this.uid = response.user.uid
+      this.userInfo.name = response.user.displayName || ''
+      this.userInfo.photo = response.user.photoURL || ''
+      this.email = response.user.email || ''
+      this.isLoggedIn = true
+      // await addDoc(collection(db, "users"), {
+      //   name: this.userInfo.name,
+      //   user_uid: response.user.uid,
+      //   photo: this.userInfo.photo
+      // });
     },
     async logOutUser () {
       console.log('logout')

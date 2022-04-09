@@ -5,7 +5,7 @@ export const useRootStore = defineStore('root', {
   state: () => {
     return {
       currentDropdown: '',
-      previousRouteName: '',
+      previousRoutePath: '',
     }
   },
   actions: {

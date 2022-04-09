@@ -1,15 +1,17 @@
 <template>
-  <div class="flex items-center border-b border-grey-5 pt-0 pb-2">
+  <div class="flex items-center border-b border-grey-5 pt-0 pb-1">
     <slot></slot>
-    <div v-if="userName" class="pb-1 parent-hover relative flex items-center space-x-2 text-sm text-grey-9">
+    <div v-if="userInfo" class="pb-1 parent-hover relative flex items-center space-x-2 text-sm text-grey-9">
+      <img v-if="userInfo.photo" :src="userInfo.photo" alt="" class="w-8 h-8 rounded-full">
       <div
-        class="flex-shrink-0 w-7 h-7 flex-center uppercase bg-highlight bg-opacity-50 text-black font-semibold text-xs rounded-full"
-        :title="userName" data-testid="task-assignee-initials"
+        v-else-if="userInfo"
+        class="flex-shrink-0 w-8 h-8 flex-center uppercase bg-highlight bg-opacity-50 text-black font-semibold text-xs rounded-full"
+        :title="userInfo.name" data-testid="task-assignee-initials"
       >
-        {{ getInitials(userName) }}
+        {{ getInitials(userInfo.name) }}
       </div>
-      <p>
-        {{ userName }}
+      <p v-if="userInfo.name" class="font-semibold">
+        {{ userInfo.name }}
       </p>
       <ul class="child-visible absolute top-full right-0 bg-yellow-light border border-grey-5 rounded shadow px-4 py-2 text-right z-50" style="min-width: 8rem">
         <li @click="logOut" class="whitespace-nowrap cursor-pointer font-semibold">
@@ -26,7 +28,7 @@ import { getInitials } from '../helpers/stringMethods'
 import { useUserStore } from '../store/userStore';
 
 const userStore = useUserStore()
-const userName = computed(() => userStore.userInfo.name)
+const userInfo = computed(() => userStore.userInfo)
 const logOut = userStore.logOutUser
 </script>
 

@@ -7,7 +7,7 @@
       </p>
       <div class="angle absolute right-0 top-0"></div>
     </div>
-    <div class="w-1/2 h-screen overflow-y-auto flex items-center" style="min-width: 40rem;">
+    <div class="w-1/2 h-screen overflow-y-auto flex items-center bg-white" style="min-width: 40rem;">
       <router-view v-slot="{ Component, route }">
         <transition name="route-fade" mode="out-in">
           <component :is="Component" :key="route.path" class="mx-auto" />

@@ -131,11 +131,7 @@ const signInWithGoogle = async() => {
   try {
     await userStore.signInWithGoogle()
     if (!userStore.isLoggedIn) router.push({ name: 'Login' })
-    if (rootStore.previousRoutePath) {
-      router.push({ path: rootStore.previousRoutePath })
-    } else {
-      router.push({ name: 'Home' })
-    }
+    router.push({ name: 'Home' })
   } catch (error: any) {
     googleSignInErrorMessage.value = error.message
   }

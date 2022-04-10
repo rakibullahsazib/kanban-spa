@@ -83,6 +83,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   const rootStore = useRootStore()
+  const userStore = useUserStore()
   rootStore.previousRoutePath = from.path?.toString() || ''
   // route navigation based on authentication is being managed by firebase auth state change
   // Set document title
@@ -91,9 +92,9 @@ router.beforeEach((to, from) => {
   document.title = title || 'Kanban'
 
   console.log(to.meta)
-  // if (to.meta.requiresAuth) {
-  //   return {name: 'Login'}
-  // }
+  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+    return {name: 'Login'}
+  }
 })
 
 export { routes }

@@ -19,6 +19,6 @@ export const listenFirebaseAuthState = () => onAuthStateChanged(auth, (user) => 
     console.log('loggedIn', userStore.email, userStore.uid)
   } else {
     rootStore.resetStores()
-    router.push({name: 'Login'})
+    // router.push({name: 'Login'})
   }
 });

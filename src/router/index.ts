@@ -89,6 +89,11 @@ router.beforeEach((to, from) => {
   let title = import.meta.env.VITE_APP_TITLE?.toString()
   title += ' | ' + to.name?.toString()
   document.title = title || 'Kanban'
+
+  console.log(to.meta)
+  // if (to.meta.requiresAuth) {
+  //   return {name: 'Login'}
+  // }
 })
 
 export { routes }

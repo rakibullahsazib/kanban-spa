@@ -21,7 +21,7 @@ const route = useRoute()
 const currentNav = computed(() => route.name)
 const navs = [
   {
-    name: 'Board View',
+    name: 'Home',
     icon: 'board.svg'
   },
   {

@@ -33,7 +33,7 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'Board View',
+        name: 'Home',
         component: () => import('../pages/Home.vue')
       },
       {

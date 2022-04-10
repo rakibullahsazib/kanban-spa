@@ -67,7 +67,9 @@ import Button from '../../components/buttons/Button.vue';
 import { validateEmailAddress, findPasswordError } from '../../helpers/inputValidators'
 import { debounce } from '../../helpers/debounce';
 import { useRootStore } from '../../store/rootStore';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const rootStore = useRootStore()
 const userStore = useUserStore()
 
@@ -130,6 +132,7 @@ const signup = async () => {
   rootStore.resetStores()
   try {
     await userStore.createUser(name.value, email.value, password.value)
+    router.push({ name: 'Home' })
   } catch (error: any) {
     apiErrorMessage.value = error.message
   }

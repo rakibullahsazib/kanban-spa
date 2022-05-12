@@ -1,0 +1,1 @@
+import{_ as e}from"./index.92ab9cd8.js";import{o as r,a as o}from"./vendor.a7353654.js";const c={};function a(s,t){return r(),o("div",null," Workspaces ")}var f=e(c,[["render",a]]);export{f as default};

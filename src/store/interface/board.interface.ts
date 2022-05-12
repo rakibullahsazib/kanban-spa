@@ -35,7 +35,7 @@ export interface TaskRequest{
   color: string;
   order: number;
   stageId: string;
-  assignee: string;
+  assignee?: string;
   statusId: string;
   dueDate: string; // ISO
 }

@@ -1,1 +1,0 @@
-import{_ as o}from"./index.92ab9cd8.js";import{o as t,a as e}from"./vendor.a7353654.js";const r={};function c(a,n){return t(),e("div",null," Notifications ")}var f=o(r,[["render",c]]);export{f as default};

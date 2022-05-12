@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/',
     component: () => import('../layouts/DashboardLayout.vue'),
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
     children: [
       {
         path: '/',
